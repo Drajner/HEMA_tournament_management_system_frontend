@@ -1,0 +1,78 @@
+$color-button-primary: #e3c30e;
+$color-font-button-primary: #ffffff;
+$color-button-secondary: #000000;
+$color-font-button-secondary: #b3b3b3;
+
+
+.fullDiv {
+  height: 100%;
+  width: 100%;
+  background-image: url('../../img/rycerz.jpg');
+  background-size: cover;
+}
+
+.transDiv {
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: rgba(227, 195, 14, 0.05);
+}
+
+.headerUp {
+  padding-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  font-size: 500%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bolder;
+  color: $color-button-primary;
+  // color: black;
+}
+
+
+.headerDown {
+  padding-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  font-size: 300%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bolder;
+  // color: $color-font-button-secondary; 
+  // color: black;
+}
+
+.mainDiv {
+  background-color: whitesmoke;
+  width: 60%;
+  height: fit-content;
+  margin-top: 1%;
+  margin-left: 20%;
+  padding: 1%;
+  outline: 3px solid #b3b3b3;
+}
+
+.header2 {
+  color: $color-font-button-secondary;
+}
+
+.mainDiv:hover {
+  outline: 3px solid $color-button-primary;
+}
+
+.header2:hover {
+  color: $color-button-primary;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 32px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  //top: 90%;
+  opacity: 1;
+}

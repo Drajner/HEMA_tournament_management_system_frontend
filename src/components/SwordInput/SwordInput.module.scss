@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  height: 64px;
+  font-size: 32px;
+}
+
+.input:focus {
+  outline: 2px solid #e3c30e;
+}
+
+.variant-primary {
+  // border-radius: 16px;
+  padding: 16px;
+  max-width: 640px;
+  outline: 2px solid #b3b3b3;
+}
+
+.variant-chat {
+  // border-radius: 32px;
+  padding: 16px 24px;
+  outline: 2px solid #b3b3b3;
+}

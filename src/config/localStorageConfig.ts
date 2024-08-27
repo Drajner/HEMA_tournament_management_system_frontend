@@ -1,0 +1,3 @@
+export enum LOCAL_STORAGE_CONFIG {
+	AUTH_TOKEN = "AUTH_TOK"
+}

@@ -1,0 +1,44 @@
+$color-button-primary: #e3c30e;
+$color-font-button-primary: #ffffff;
+$color-button-secondary: #000000;
+$color-font-button-secondary: #ffffff;
+
+.container {
+  // font-family: Helvetica, monospace;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  border: none;
+  transition-duration: 0.3s;
+  padding: 0 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.container:hover {
+  scale: 0.95;
+}
+
+.container:active {
+  scale: 0.9;
+}
+
+.variant-default {
+  background-color: $color-button-primary;
+  color: $color-font-button-primary;
+  max-width: 560px;
+  width: 100%;
+  border-radius: 16px;
+  height: 64px;
+  font-size: 32px;
+}
+
+.variant-small {
+  background-color: $color-button-secondary;
+  color: $color-font-button-secondary;
+  border-radius: 16px;
+  height: 48px;
+  font-size: 24px;
+}

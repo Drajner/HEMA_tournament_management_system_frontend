@@ -1,0 +1,60 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 64px;
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 16px;
+  width: 100%;
+  margin-top: 10%;
+}
+
+.signInCaption {
+  margin-top: -2.5%;
+  a {
+    color: #e3c30e;
+  }
+}
+
+.fullDiv {
+  height: 100%;
+  width: 100%;
+  background-image: url('../../img/rycerz.jpg');
+  background-size: cover;
+}
+
+.transDiv {
+  height: 100%;
+  width: 100%;
+  background: rgba(227, 195, 14, 0.05);
+}
+
+.headerUp {
+  padding-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  font-size: 500%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bolder;
+  color: #e3c30e;
+  // color: black;
+}
+
+.headerDown {
+  padding-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  font-size: 300%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bolder;
+  color: #e3c30e; 
+  // color: black;
+}
