@@ -49,7 +49,7 @@ export const LoginPageAdmin: React.FC = () => {
 						<SwordButtonAlt type="submit">Zaloguj się</SwordButtonAlt>
 						<p className={s.signInCaption}>
 							Nie masz konta?{" "}
-							<Link to={PATHS.TODO}><b>Zarejestruj się</b></Link>
+							<Link to={PATHS.register}><b>Zarejestruj się</b></Link>
 						</p>
 					</form>
 				</div>

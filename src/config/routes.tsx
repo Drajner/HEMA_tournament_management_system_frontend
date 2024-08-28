@@ -7,6 +7,9 @@ import {TournamentPage} from "../pages/TournamentsPage";
 import {TournamentDetailsPage} from "../pages/TournamentDetailsPage";
 import {GroupDetailsPage} from "../pages/GroupDetailsPage";
 import {FinalsTreePage} from "../pages/FinalsTreePage";
+import {RegisterPage} from "../pages/RegisterPage";
+import { FightDetailsPage } from "../pages/FightDetailsPage";
+import { ParticipantDetailsPage } from "../pages/ParticipantDetailsPage";
 import {PATHS} from "./paths";
 
 
@@ -38,6 +41,18 @@ export const routes = createBrowserRouter([
 	{
 		path: PATHS.finals,
 		element: <FinalsTreePage/>
+	},
+	{
+		path: PATHS.register,
+		element: <RegisterPage/>
+	},
+	{
+		path: PATHS.fight,
+		element: <FightDetailsPage/>
+	},
+	{
+		path: PATHS.participant,
+		element: <ParticipantDetailsPage/>
 	},
 	
 ])

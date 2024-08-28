@@ -52,9 +52,10 @@ export const TournamentDetailsPage = () => {
           <div className={s.contentRow}>
             {participants.map((participant: any) => (
               <div key={participant.id} className={s.mainDiv}>
+                <Link to={`/participant/${participant.participantId}`}>
                 <div className={s.header}>
                   <h2 className={s.header2}>ID: {participant.participantId} | {participant.fullName}</h2>
-                  <div className={s.header2}>
+                  <div className={s.header3}>
                   <ul>
                     <li>Punkty: {participant.score}</li>
                     <li>Wygrane walki: {participant.wins}</li>
@@ -63,6 +64,7 @@ export const TournamentDetailsPage = () => {
                   </ul>
                   </div>
                 </div>
+                </Link>
               </div>
             ))}
           </div>

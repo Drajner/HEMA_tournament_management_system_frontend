@@ -1,0 +1,111 @@
+$color-button-primary: #e3c30e;
+$color-font-button-primary: #ffffff;
+$color-button-secondary: #000000;
+$color-font-button-secondary: #b3b3b3;
+
+.fightDetailsContainer {
+  background-color: whitesmoke;
+  width: 60%;
+  margin: 5% auto;
+  padding: 2%;
+  outline: 3px solid $color-font-button-secondary;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.participantInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  // Centers participant boxes and VS text vertically
+    gap: 20px;            // Space between the elements
+}
+  
+.participantBox {
+    flex: 1;                         // Allows the boxes to grow and fill the available space
+    max-width: 45%;
+    min-width: 45%;                // Set the max width to a percentage of the parent container
+    padding: 20px;
+    background-color: whitesmoke;
+    border: 2px solid $color-button-primary;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+        font-size: 150%;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: $color-button-primary;
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-size: 120%;
+        color: $color-button-secondary;
+        margin: 8px 0;
+    }
+}
+
+.header {
+  font-size: 300%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bolder;
+  color: $color-button-primary;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.participant {
+  text-align: center;
+
+  h2 {
+    font-size: 200%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bolder;
+    color: $color-button-primary;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 150%;
+    color: $color-font-button-secondary;
+    margin-bottom: 12px;
+  }
+}
+
+.vs {
+  font-size: 250%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: $color-button-secondary;
+}
+
+.matchDetails {
+  text-align: center;
+
+  p {
+    font-size: 150%;
+    color: $color-button-secondary;
+    margin: 10px 0;
+  }
+}
+
+.background {
+  height: 100%;
+  width: 100%;
+  background-image: url('../../img/rycerz.jpg');
+  background-size: cover;
+}
+
+.transDiv {
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: rgba(227, 195, 14, 0.05);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}

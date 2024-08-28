@@ -1,1 +1,1 @@
-export * from'./FinalsTreePage';
+export * from './FinalsTreePage';

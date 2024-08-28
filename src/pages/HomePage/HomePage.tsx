@@ -21,10 +21,10 @@ export const HomePage: React.FC = () => {
 						<h1></h1>
 						<h1></h1>
 						<h1></h1>
-						<h3 className={s.headerDown}>"Ma coś z rycerza – zakuty łeb"</h3>
+						<h3 className={s.headerDown}>"Ma w sobie coś z rycerza – zakuty łeb"</h3>
 						<h3></h3>
-							<SwordLinkButton href={PATHS.loginParticipant}>Zawodnik</SwordLinkButton>
-							<SwordLinkButtonAlt href={PATHS.loginAdmin}>Administrator</SwordLinkButtonAlt>
+							<SwordLinkButton href={PATHS.tournament}>Lista Turniejów</SwordLinkButton>
+							<SwordLinkButtonAlt href={PATHS.loginAdmin}>Logowanie</SwordLinkButtonAlt>
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
 import s from "./GroupDetailsPage.module.scss";
 import { sendRequestGET } from 'requests';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export const GroupDetailsPage = () => {
   const [participants, setParticipants] = useState([]);
@@ -40,19 +40,22 @@ export const GroupDetailsPage = () => {
           <h1><br></br></h1>
           <div className={s.contentRow}>
             {participants.map((participant: any) => (
+              <Link to={`/participant/${participant.participantId}`}>
               <div key={participant.id} className={s.mainDiv}>
                 <div className={s.header}>
                   <h2 className={s.header2}>ID: {participant.participantId} | {participant.fullName}</h2>
-                  <div className={s.header2}>
+                  <div className={s.header3}>
                   <ul>
                     <li>Punkty: {participant.score}</li>
                     <li>Wygrane walki: {participant.wins}</li>
                     <li>Duble: {participant.doubles}</li>
                     <li>Kartki: {participant.cards}</li>
+                    <li>Status: {participant.status}</li>
                   </ul>
                   </div>
                 </div>
               </div>
+              </Link>
             ))}
           </div>
 
@@ -65,7 +68,9 @@ export const GroupDetailsPage = () => {
             {fights.map((fight: any, index: number) => (
               <div key={fight.id} className={s.mainDiv}>
                 <div className={s.header}>
-                  <h2 className={s.header2}>WALKA {index + 1}: {fight.firstParticipant.fullName} vs {fight.secondParticipant.fullName}</h2>
+                  <Link to={`/fight/${fight.id}`}>
+                  <h2 className={s.header2}>WALKA {index + 1}: {fight.firstParticipant.fullName} vs {fight.secondParticipant.fullName} {fight.firstParticipantPoints}:{fight.secondParticipantPoints}</h2>
+                  </Link>
                 </div>
               </div>
             ))}

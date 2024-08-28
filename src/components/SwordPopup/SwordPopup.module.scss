@@ -1,0 +1,88 @@
+$color-button-primary: #e3c30e;
+$color-font-button-primary: #ffffff;
+$color-button-secondary: #000000;
+$color-font-button-secondary: #ffffff;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popupHeader {
+  color: $color-button-secondary;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.popupContent {
+    margin-bottom: 1.5rem;
+  }
+  
+  input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.acceptButton {
+  background-color: $color-button-primary;
+  color: $color-font-button-primary;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.acceptButton:hover {
+  background-color: darken($color-button-primary, 10%);
+}
+
+.cancelButton {
+  background-color: $color-button-secondary;
+  color: $color-font-button-secondary;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.cancelButton:hover {
+  background-color: darken($color-button-secondary, 10%);
+}

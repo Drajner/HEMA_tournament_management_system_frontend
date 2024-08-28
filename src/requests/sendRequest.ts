@@ -13,7 +13,20 @@ export function sendRequestPOST(data: FieldValues, url: string) {
         },
         body: JSON.stringify(data)
     });
-}      
+}   
+
+export function sendBareRequestPOST(data: string, url: string) {
+    url = BASE_URL + url
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        body: data
+    });
+}  
+
 export function sendRequestGET(url: string) {
     url = BASE_URL + url
     return fetch(url, {

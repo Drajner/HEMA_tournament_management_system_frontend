@@ -6,4 +6,7 @@ export const PATHS = {
 	tournamentDetails: '/tournament/:number',
 	groupDetails: '/group/:number',
 	finals: '/finals/:number',
+	register: '/register',
+	fight: '/fight/:number',
+	participant: 'participant/:number',
 }
