@@ -37,3 +37,14 @@ export function sendRequestGET(url: string) {
         }
     });
 }
+
+export function sendRequestDELETE(url: string) {
+    url = BASE_URL + url
+    return fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+}
