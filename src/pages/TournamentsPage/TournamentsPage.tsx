@@ -3,14 +3,17 @@ import {TemplatePage} from "templates/TemplatePage";
 import s from "./TournamentsPage.module.scss"
 import {Link, useNavigate} from "react-router-dom";
 import {PATHS} from "config/paths";
-import {sendRequestGET, sendRequestPOST, sendBareRequestPOST} from 'requests';
+import {sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendRequestDELETE} from 'requests';
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
 import { SwordPopup } from 'components/SwordPopup';
+import { SwordConfirmPopup } from 'components/SwordConfirmPopup'; 
 import { SwordButton } from 'components/SwordButton';
 
 export const TournamentPage = () => {
 	const [tournaments, setTournaments] = useState([]);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+    const [tournamentToDelete, setTournamentToDelete] = useState<number | null>(null);
 
 	const fetchTournaments = () => {
 	  sendRequestGET('tournaments/get').then(async r => {
@@ -26,16 +29,35 @@ export const TournamentPage = () => {
 	const handleAddTournament = (inputString: string) => {
 		sendBareRequestPOST(inputString, 'tournaments/add').then(async r => {
 		  let response = await r.json();
-		  console.log(response)
 		  if (r.ok) {
-			// Update tournaments list
 			fetchTournaments();
 			setIsPopupOpen(false);
 		  } else {
-			alert('Failed to add tournament');
+			alert('Nie udało się dodać turnieju');
 		  }
 		});
 	};
+
+	const handleDeleteTournament = () => {
+		console.log(tournamentToDelete);
+		if (tournamentToDelete === null) return;
+		sendRequestDELETE(`tournaments/delete/${tournamentToDelete}`).then(async r => {
+		  if (r.ok) {
+			fetchTournaments();
+			setIsConfirmPopupOpen(false);
+			setTournamentToDelete(null);
+		  } else {
+			alert('Nie udało się usunąć turnieju');
+		  }
+		});
+	  };
+
+	const openConfirmPopup = (tournamentId: number) => {
+		console.log(tournamentId);
+        setTournamentToDelete(tournamentId);
+        setIsConfirmPopupOpen(true);
+    };
+
 
 	return (
 		<TemplatePage>
@@ -48,13 +70,21 @@ export const TournamentPage = () => {
 				Utwórz turniej
 			</SwordButtonPopup>
 			</div>
-			{tournaments.map((item1: any) => (
-				<div className={s.mainDiv} key={item1.tournamentId}>
+			{tournaments.map((tournament: any) => (
+				<div className={s.mainDiv} key={tournament.tournamentId}>
 				<div className={s.header}>
-					<Link to={`/tournament/${item1.tournamentId}`}>
-					<h2 className={s.header2}>ID: {item1.tournamentId} | {item1.name}</h2>
+					<Link to={`/tournament/${tournament.tournamentId}`}>
+					<h2 className={s.header2}>ID: {tournament.tournamentId} | {tournament.name}</h2>
 					</Link>
+					
 				</div>
+				<SwordButtonPopup
+                    className={s.deleteButton}
+                    onClick={() => openConfirmPopup(tournament.tournamentId)}
+                    variant="small"
+        	        >
+                    Usuń
+                </SwordButtonPopup>
 				</div>
 			))}
 			<SwordPopup
@@ -64,6 +94,13 @@ export const TournamentPage = () => {
 				title="Dodaj turniej"
 				prompt="Wpisz nazwę turnieju"
 			/>
+			<SwordConfirmPopup
+                isOpen={isConfirmPopupOpen}
+                onClose={() => setIsConfirmPopupOpen(false)}
+                onAccept={handleDeleteTournament}
+                title="Usuń turniej"
+                text="Czy jesteś pewny/a, że chcesz usunąć ten turniej?"
+            />
 			</div>
 		</div>
 		</TemplatePage>

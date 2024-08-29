@@ -39,10 +39,10 @@ interface SwordPopupProps {
             </div>
             <div className={s.popupActions}>
               <button className={s.cancelButton} onClick={onClose}>
-                Cancel
+                Odrzuć
               </button>
               <button className={s.acceptButton} onClick={handleAccept}>
-                Accept
+                Akceptuj
               </button>
             </div>
           </div>

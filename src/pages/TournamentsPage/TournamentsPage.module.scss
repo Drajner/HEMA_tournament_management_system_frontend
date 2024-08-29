@@ -44,11 +44,31 @@ $color-font-button-secondary: #b3b3b3;
   padding: 1rem;
   outline: 3px solid #b3b3b3;
   border-radius: 16px;
+  display: flex;
+  align-items: center;
+  position: relative; /* Position the button absolutely within this container */
+  padding-right: 3rem; /* Ensure there's space for the button */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 1rem; /* Adds space between text and button */
 }
 
 .header2 {
   color: $color-font-button-secondary;
+  flex: 1; /* Allow the text to take available space */
 }
+
+.deleteButton {
+  position: absolute; /* Position absolutely within the mainDiv */
+  right: 1rem; /* Distance from the right border */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Center vertically with respect to the button */
+}
+
 
 .mainDiv:hover {
   outline: 3px solid $color-button-primary;
