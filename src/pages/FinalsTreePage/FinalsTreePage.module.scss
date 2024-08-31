@@ -3,64 +3,71 @@ $color-font-button-primary: #ffffff;
 $color-button-secondary: #000000;
 $color-font-button-secondary: #b3b3b3;
 
-
 .fullDiv {
   height: 100%;
   width: 100%;
   background-image: url('../../img/rycerz.jpg');
   background-size: cover;
-}
-
-.transDiv {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  background: rgba(227, 195, 14, 0.05);
 }
 
 .headerUp {
   padding-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
+  margin: 0 auto;
+  //width: fit-content;
   font-size: 500%;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-weight: bolder;
   color: $color-button-primary;
-  // color: black;
 }
 
-
-.headerDown {
-  padding-top: 3%;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-  font-size: 300%;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-weight: bolder;
-  // color: $color-font-button-secondary; 
-  // color: black;
-}
-
-.mainDiv {
-  background-color: whitesmoke;
-  width: 60%;
-  height: fit-content;
-  margin-top: 1%;
-  margin-left: 20%;
-  padding: 1%;
-  outline: 3px solid #b3b3b3;
-}
-
-.header2 {
-  color: $color-font-button-secondary;
-}
-
-.mainDiv:hover {
-  outline: 3px solid $color-button-primary;
-}
-
-.header2:hover {
+.finalsTreeContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
   color: $color-button-primary;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: auto;
+  padding: 0 20px; /* Optional padding for aesthetics */
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin-bottom: 50px;
+}
+
+.finalsStyle, .thirdPlaceStyle {
+  font-size: 200%;
+  width: 45%;
+  text-align: center;
+}
+
+.bottomRow {
+  width: fit-content; /* Adjust width to content */
+  display: flex;
+  justify-content: center;
+  min-width: 100%; /* Ensure it doesn't shrink too much */
+}
+
+.fightNode {
+  margin: 20px;
+  text-align: center;
+}
+
+.childNodes {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.addButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 }

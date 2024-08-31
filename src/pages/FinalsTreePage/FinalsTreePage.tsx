@@ -3,51 +3,81 @@ import { TemplatePage } from "templates/TemplatePage";
 import s from "./FinalsTreePage.module.scss";
 import { sendRequestGET } from 'requests';
 import { Link, useParams } from 'react-router-dom';
+import { SwordLinkButton } from 'components/SwordLinkButton';
+import { SwordLinkButtonAlt } from 'components/SwordLinkButtonAlt';
 import {PATHS} from "../../config/paths";
 
+
 const FightNode = ({ fightNode }) => {
-  if (!fightNode) {
-    return null;
-  }
+  if (!fightNode) return null;
 
   const fight = fightNode.fight;
-
   const firstParticipant = fight?.firstParticipant?.fullName || "Oczekujący";
   const secondParticipant = fight?.secondParticipant?.fullName || "Oczekujący";
 
-
   return (
-    <div style={{ margin: "20px", textAlign: "center" }}>
+    <div className={s.fightNode}>
       <div>
-        <Link to={`/fight/${fight.id}`}>
+        {/* <Link to={`/fight/${fight.id}`}>
           <strong>{firstParticipant}</strong> vs <strong>{secondParticipant}</strong>
-        </Link>
+        </Link> */}
+        <div className={s.addButtonContainer}>
+          <SwordLinkButtonAlt href={`${PATHS.fight.replace(':number', fight.id)}`} variant='small'>
+          <strong>{firstParticipant}</strong> vs <strong>{secondParticipant}</strong>
+          </SwordLinkButtonAlt>
+        </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "space-around", marginTop: "20px" }}>
-        <div>{fightNode.firstChildNode && <FightNode fightNode={fightNode.firstChildNode} />}</div>
-        <div>{fightNode.secondChildNode && <FightNode fightNode={fightNode.secondChildNode} />}</div>
+      <div className={s.childNodes}>
+        {fightNode.firstChildNode && <FightNode fightNode={fightNode.firstChildNode} />}
+        {fightNode.secondChildNode && <FightNode fightNode={fightNode.secondChildNode} />}
       </div>
     </div>
   );
 };
 
 const FinalsTree = ({ data }) => {
-  if (!data) {
-    return <div>Brak dostępnych finałów</div>;
-  }
+  if (!data) return <div>Brak dostępnych finałów</div>;
 
-  const [ finals, thirdPlace ] = data;
+  const [finals, thirdPlace] = data;
+  const firstFinalsParticipant = finals?.firstParticipant?.fullName || "Oczekujący";
+  const secondFinalsParticipant = finals?.secondParticipant?.fullName || "Oczekujący";
+  const firstThirdPlaceParticipant = thirdPlace?.firstParticipant?.fullName || "Oczekujący";
+  const secondThirdPlaceParticipant = thirdPlace?.secondParticipant?.fullName || "Oczekujący";
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
-      <div style={{ marginRight: "100px", textAlign: "center" }}>
-        <h3>Walka o trzecie miejsce</h3>
-        <FightNode fightNode={thirdPlace} />
+    <div className={s.finalsTreeContainer}>
+      
+      <div className={s.finalsStyle}>
+          <h3>Finały</h3>
+          <div className={s.fightNode}>
+            {/* <Link to={`/fight/${finals.fight.id}`}>
+            <strong>{firstFinalsParticipant}</strong> vs <strong>{secondFinalsParticipant}</strong>
+            </Link> */}
+            <div className={s.addButtonContainer}>
+              <SwordLinkButton href={`${PATHS.fight.replace(':number', finals.fight.id)}`}>
+              <strong>{firstFinalsParticipant}</strong> vs <strong>{secondFinalsParticipant}</strong>
+              </SwordLinkButton>
+            </div>
+          </div>
       </div>
-
-      <div style={{ textAlign: "center" }}>
-        <h3>Finały</h3>
-        <FightNode fightNode={finals} />
+      <h1><br></br></h1>
+      <div className={s.thirdPlaceStyle}>
+          <h3>Walka o trzecie miejsce</h3>
+          <div className={s.fightNode}>
+            {/* <Link to={`/fight/${thirdPlace.fight.id}`}>
+            <strong>{firstThirdPlaceParticipant}</strong> vs <strong>{secondThirdPlaceParticipant}</strong>
+            </Link> */}
+            <div className={s.addButtonContainer}>
+              <SwordLinkButton href={`${PATHS.fight.replace(':number', thirdPlace.fight.id)}`}>
+              <strong>{firstThirdPlaceParticipant}</strong> vs <strong>{secondThirdPlaceParticipant}</strong>
+              </SwordLinkButton>
+            </div>
+          </div>
+      </div>
+      <h1><br></br></h1>
+      <div className={s.bottomRow}>
+          <FightNode fightNode={finals.firstChildNode} />
+          <FightNode fightNode={finals.secondChildNode} />
       </div>
     </div>
   );
@@ -55,7 +85,6 @@ const FinalsTree = ({ data }) => {
 
 export const FinalsTreePage = () => {
   const [finals, setFinals] = useState(null);
-
   const { number } = useParams();
 
   useEffect(() => {
@@ -72,6 +101,8 @@ export const FinalsTreePage = () => {
     <TemplatePage>
       <div className={s.fullDiv}>
         <h1 className={s.headerUp}>Drabinka finałowa</h1>
+        <h1><br></br></h1>
+        <h1><br></br></h1>
         {finals ? <FinalsTree data={finals} /> : <p>Loading...</p>}
       </div>
     </TemplatePage>
