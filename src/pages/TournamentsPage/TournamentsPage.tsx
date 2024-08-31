@@ -52,7 +52,6 @@ export const TournamentPage = () => {
 	  };
 
 	const openConfirmPopup = (tournamentId: number) => {
-		console.log(tournamentId);
         setTournamentToDelete(tournamentId);
         setIsConfirmPopupOpen(true);
     };
