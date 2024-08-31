@@ -9,4 +9,5 @@ export const PATHS = {
 	register: '/register',
 	fight: '/fight/:number',
 	participant: 'participant/:number',
+	addParticipant: 'addParticipant/:number'
 }

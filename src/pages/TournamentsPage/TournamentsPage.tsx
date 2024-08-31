@@ -39,7 +39,6 @@ export const TournamentPage = () => {
 	};
 
 	const handleDeleteTournament = () => {
-		console.log(tournamentToDelete);
 		if (tournamentToDelete === null) return;
 		sendRequestDELETE(`tournaments/delete/${tournamentToDelete}`).then(async r => {
 		  if (r.ok) {

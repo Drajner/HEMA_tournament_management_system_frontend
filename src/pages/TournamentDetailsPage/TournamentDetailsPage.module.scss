@@ -9,12 +9,18 @@ $color-font-button-secondary: #b3b3b3;
   width: 100%;
   background-image: url('../../img/rycerz.jpg');
   background-size: cover;
+  display: flex;
+  align-items: center;
+  //justify-content: center;
+  flex-direction: column; /* Centers the content vertically */
 }
 
 .transDiv {
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  width: 60%;
+  padding: 2rem;
+  border-radius: 16px;
+  opacity: 100%;
+  
 }
 
 .headerUp {
@@ -44,16 +50,33 @@ $color-font-button-secondary: #b3b3b3;
 
 .mainDiv {
   background-color: whitesmoke;
-  width: 60%;
-  height: fit-content;
-  margin-top: 1%;
-  margin-left: 20%;
-  padding: 1%;
+  margin-top: 1rem;
+  padding: 1rem;
   outline: 3px solid #b3b3b3;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  position: relative; /* Position the button absolutely within this container */
+  padding-right: 3rem; /* Ensure there's space for the button */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 1rem; /* Adds space between text and button */
 }
 
 .header2 {
   color: $color-font-button-secondary;
+  flex: 1; /* Allow the text to take available space */
+}
+
+.deleteButton {
+  position: absolute; /* Position absolutely within the mainDiv */
+  right: 1rem; /* Distance from the right border */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Center vertically with respect to the button */
 }
 
 .mainDiv:hover {
@@ -70,8 +93,8 @@ $color-font-button-secondary: #b3b3b3;
   align-items: center;
   row-gap: 32px;
   width: 100%;
-  height: 100%;
-  position: absolute;
+  height: 20%;
+  position: relative;
   //top: 90%;
   opacity: 1;
 }
@@ -79,3 +102,11 @@ $color-font-button-secondary: #b3b3b3;
 .header3 {
   color: $color-font-button-secondary;
 }
+
+.addButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+

@@ -27,6 +27,17 @@ export function sendBareRequestPOST(data: string, url: string) {
     });
 }  
 
+export function sendEmptyRequestPOST(url: string) {
+    url = BASE_URL + url
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+}  
+
 export function sendRequestGET(url: string) {
     url = BASE_URL + url
     return fetch(url, {
@@ -48,3 +59,15 @@ export function sendRequestDELETE(url: string) {
         }
     });
 }
+
+export function sendBareRequestDELETE(data: undefined, url: string) {
+    url = BASE_URL + url
+    return fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        body: data
+    });
+}  

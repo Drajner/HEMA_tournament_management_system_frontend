@@ -11,6 +11,7 @@ import {RegisterPage} from "../pages/RegisterPage";
 import { FightDetailsPage } from "../pages/FightDetailsPage";
 import { ParticipantDetailsPage } from "../pages/ParticipantDetailsPage";
 import {PATHS} from "./paths";
+import { AddParticipantPage } from "pages/AddParticipantPage";
 
 
 export const routes = createBrowserRouter([
@@ -54,5 +55,9 @@ export const routes = createBrowserRouter([
 		path: PATHS.participant,
 		element: <ParticipantDetailsPage/>
 	},
+	{
+		path: PATHS.addParticipant,
+		element: <AddParticipantPage/>
+	}
 	
 ])
