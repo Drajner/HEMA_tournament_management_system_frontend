@@ -24,50 +24,36 @@ $color-font-button-secondary: #b3b3b3;
 }
 
 .finalsTreeContainer {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  color: $color-button-primary;
+  align-items: flex-start;
   overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: auto;
-  padding: 0 20px; /* Optional padding for aesthetics */
-}
-
-.topRow {
-  display: flex;
-  justify-content: space-around;
-  width: 80%;
-  margin-bottom: 50px;
-}
-
-.finalsStyle, .thirdPlaceStyle {
-  font-size: 200%;
-  width: 45%;
-  text-align: center;
-}
-
-.bottomRow {
-  width: fit-content; /* Adjust width to content */
-  display: flex;
-  justify-content: center;
-  min-width: 100%; /* Ensure it doesn't shrink too much */
+  overflow-y: hidden;
+  padding: 20px;
 }
 
 .fightNode {
-  margin: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
 }
 
 .childNodes {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+  flex-direction: column; /* Stack child nodes vertically */
+  margin-top: 10px; /* Space between parent and children */
 }
 
 .addButtonContainer {
+  margin-bottom: 1rem;
+}
+
+.horizontalTreeContainer {
   display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start; /* Ensure it aligns left */
+  width: max-content; /* Allow it to take up as much width as needed */
+  position: relative;
 }

@@ -8,7 +8,7 @@ import { SwordLinkButtonAlt } from 'components/SwordLinkButtonAlt';
 import {PATHS} from "../../config/paths";
 
 
-const FightNode = ({ fightNode }) => {
+const FightNode = ({ fightNode, level = 0 }) => {
   if (!fightNode) return null;
 
   const fight = fightNode.fight;
@@ -16,20 +16,17 @@ const FightNode = ({ fightNode }) => {
   const secondParticipant = fight?.secondParticipant?.fullName || "Oczekujący";
 
   return (
-    <div className={s.fightNode}>
-      <div>
-        {/* <Link to={`/fight/${fight.id}`}>
+    <div className={s.fightNode} style={{ marginLeft: `${level * 300}px` }}>
+      <div className={s.childNodes}>
+        {fightNode.firstChildNode && <FightNode fightNode={fightNode.firstChildNode} level={level + 1} />}
+      </div>
+      <div className={s.addButtonContainer}>
+        <SwordLinkButtonAlt href={`${PATHS.fight.replace(':number', fight.id)}`} variant='small'>
           <strong>{firstParticipant}</strong> vs <strong>{secondParticipant}</strong>
-        </Link> */}
-        <div className={s.addButtonContainer}>
-          <SwordLinkButtonAlt href={`${PATHS.fight.replace(':number', fight.id)}`} variant='small'>
-          <strong>{firstParticipant}</strong> vs <strong>{secondParticipant}</strong>
-          </SwordLinkButtonAlt>
-        </div>
+        </SwordLinkButtonAlt>
       </div>
       <div className={s.childNodes}>
-        {fightNode.firstChildNode && <FightNode fightNode={fightNode.firstChildNode} />}
-        {fightNode.secondChildNode && <FightNode fightNode={fightNode.secondChildNode} />}
+        {fightNode.secondChildNode && <FightNode fightNode={fightNode.secondChildNode} level={level + 1} />}
       </div>
     </div>
   );
@@ -45,39 +42,34 @@ const FinalsTree = ({ data }) => {
   const secondThirdPlaceParticipant = thirdPlace?.secondParticipant?.fullName || "Oczekujący";
 
   return (
-    <div className={s.finalsTreeContainer}>
-      
-      <div className={s.finalsStyle}>
+    <div style={{ overflowX: 'auto', width: '100%' }}>
+      <div className={s.finalsTreeContainer}>
+        <div className={s.horizontalTreeContainer}>
+          <FightNode fightNode={finals.firstChildNode} />
+        </div>
+        <div className={s.finalsStyle}>
           <h3>Finały</h3>
           <div className={s.fightNode}>
-            {/* <Link to={`/fight/${finals.fight.id}`}>
-            <strong>{firstFinalsParticipant}</strong> vs <strong>{secondFinalsParticipant}</strong>
-            </Link> */}
             <div className={s.addButtonContainer}>
               <SwordLinkButton href={`${PATHS.fight.replace(':number', finals.fight.id)}`}>
-              <strong>{firstFinalsParticipant}</strong> vs <strong>{secondFinalsParticipant}</strong>
+                <strong>{firstFinalsParticipant}</strong> vs <strong>{secondFinalsParticipant}</strong>
               </SwordLinkButton>
             </div>
           </div>
-      </div>
-      <h1><br></br></h1>
-      <div className={s.thirdPlaceStyle}>
+        </div>
+        <div className={s.thirdPlaceStyle}>
           <h3>Walka o trzecie miejsce</h3>
           <div className={s.fightNode}>
-            {/* <Link to={`/fight/${thirdPlace.fight.id}`}>
-            <strong>{firstThirdPlaceParticipant}</strong> vs <strong>{secondThirdPlaceParticipant}</strong>
-            </Link> */}
             <div className={s.addButtonContainer}>
               <SwordLinkButton href={`${PATHS.fight.replace(':number', thirdPlace.fight.id)}`}>
-              <strong>{firstThirdPlaceParticipant}</strong> vs <strong>{secondThirdPlaceParticipant}</strong>
+                <strong>{firstThirdPlaceParticipant}</strong> vs <strong>{secondThirdPlaceParticipant}</strong>
               </SwordLinkButton>
             </div>
           </div>
-      </div>
-      <h1><br></br></h1>
-      <div className={s.bottomRow}>
-          <FightNode fightNode={finals.firstChildNode} />
+        </div>
+        <div className={s.horizontalTreeContainer}>
           <FightNode fightNode={finals.secondChildNode} />
+        </div>
       </div>
     </div>
   );
