@@ -26,14 +26,24 @@ $color-font-button-secondary: #b3b3b3;
   text-align: left;
   padding: 10px 20px;
 
-  p {
+  label {
     font-size: 150%;
     color: $color-button-secondary;
     margin-bottom: 8px;
+    display: block;
 
     span {
       font-weight: bold;
       color: $color-button-primary;
+      margin-right: 10px;
+    }
+
+    input, select {
+      padding: 5px;
+      margin-left: 10px;
+      font-size: 100%;
+      width: 100%;
+      max-width: 300px;
     }
   }
 }
@@ -45,7 +55,6 @@ $color-font-button-secondary: #b3b3b3;
     background-size: cover;
     display: flex;
     align-items: center;
-    //justify-content: center;
     flex-direction: column; /* Centers the content vertically */
   }
   
@@ -57,8 +66,8 @@ $color-font-button-secondary: #b3b3b3;
     
   }
 
-.addButtonContainer {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
+  .addButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }

@@ -12,6 +12,11 @@ import { FightDetailsPage } from "../pages/FightDetailsPage";
 import { ParticipantDetailsPage } from "../pages/ParticipantDetailsPage";
 import {PATHS} from "./paths";
 import { AddParticipantPage } from "pages/AddParticipantPage";
+import { EditParticipantPage } from "pages/EditParticipantPage";
+import { EditFightPage } from "pages/EditFightPage";
+import { FightReportPage } from "pages/FightReportPage/FightReportPage";
+import { ReportsPage } from "pages/ReportsPage/ReportsPage";
+import { ReportDetailsPage } from "pages/ReportDetailsPage";
 
 
 export const routes = createBrowserRouter([
@@ -58,6 +63,25 @@ export const routes = createBrowserRouter([
 	{
 		path: PATHS.addParticipant,
 		element: <AddParticipantPage/>
-	}
-	
+	},
+	{
+		path: PATHS.editParticipant,
+		element: <EditParticipantPage/>
+	},
+	{
+		path: PATHS.editFight,
+		element: <EditFightPage/>
+	},
+	{
+		path: PATHS.fightReport,
+		element: <FightReportPage/>
+	},
+	{
+		path: PATHS.reports,
+		element: <ReportsPage/>
+	},
+	{
+		path: PATHS.report,
+		element: <ReportDetailsPage/>
+	},
 ])

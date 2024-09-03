@@ -23,8 +23,7 @@ export const LoginPageAdmin: React.FC = () => {
 			'users/login'
 		).then(async r => {
 			let response = await r.json()
-
-			if (response.status) {
+			if (r.ok) {
 				redirect(PATHS.tournament)
 				localStorage.setItem("token", response.token);
 			}

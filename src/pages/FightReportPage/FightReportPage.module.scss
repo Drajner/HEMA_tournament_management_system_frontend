@@ -3,6 +3,16 @@ $color-font-button-primary: #ffffff;
 $color-button-secondary: #000000;
 $color-font-button-secondary: #b3b3b3;
 
+.fightDetailsContainer {
+  background-color: whitesmoke;
+  width: 60%;
+  margin: 5% auto;
+  padding: 2%;
+  outline: 3px solid $color-font-button-secondary;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .participantInfo {
     display: flex;
     justify-content: space-between;
@@ -11,9 +21,9 @@ $color-font-button-secondary: #b3b3b3;
 }
   
 .participantBox {
-    flex: 1;                         // Allows the boxes to grow and fill the available space
+    flex: 1;                         
     max-width: 45%;
-    min-width: 45%;                // Set the max width to a percentage of the parent container
+    min-width: 45%;                
     padding: 20px;
     background-color: whitesmoke;
     border: 2px solid $color-button-primary;
@@ -33,12 +43,27 @@ $color-font-button-secondary: #b3b3b3;
         margin-bottom: 12px;
     }
 
-    p {
-        font-size: 120%;
-        color: $color-button-secondary;
-        margin: 8px 0;
+    label {
+        display: block;
+        margin-bottom: 10px;
+
+        span {
+            color: $color-button-secondary;
+            font-size: 120%;
+            font-weight: bold;
+        }
+
+        input, select {
+            margin-top: 5px;
+            padding: 8px;
+            font-size: 100%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
     }
 }
+
 
 .header {
   font-size: 300%;
@@ -81,23 +106,26 @@ $color-font-button-secondary: #b3b3b3;
     color: $color-button-secondary;
     margin: 10px 0;
   }
-}
 
-.fightDetailsContainer {
-  background-color: whitesmoke;
-  width: 60%;
-  margin: 5% auto;
-  padding: 2%;
-  outline: 3px solid $color-font-button-secondary;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;  // Added to use for centering the button within the container
-}
+  label {
+    display: block;
+    margin-bottom: 10px;
 
-.addButtonContainer {
-  display: flex;
-  justify-content: center;  // Centers the button horizontally within the container
-  margin-top: 20px;  // Adds some space between the container and the button
+    span {
+        color: $color-button-secondary;
+        font-size: 120%;
+        font-weight: bold;
+    }
+
+    input, select {
+        margin-top: 5px;
+        padding: 8px;
+        font-size: 100%;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        width: 100%;
+    }
+}
 }
 
 .background {
@@ -105,20 +133,20 @@ $color-font-button-secondary: #b3b3b3;
   width: 100%;
   background-image: url('../../img/rycerz.jpg');
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 40px; // Add padding at the bottom to prevent the button from sticking to the edge
 }
 
 .transDiv {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
   height: 100%;
+  width: 100%;
   background: rgba(227, 195, 14, 0.05);
+  display: flex;
+  justify-content: center;
   padding: 20px;
 }
 
+.addButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }

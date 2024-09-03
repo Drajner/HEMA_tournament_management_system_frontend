@@ -8,6 +8,11 @@ export const PATHS = {
 	finals: '/finals/:number',
 	register: '/register',
 	fight: '/fight/:number',
-	participant: 'participant/:number',
-	addParticipant: 'addParticipant/:number'
+	participant: '/participant/:number',
+	addParticipant: '/addParticipant/:number',
+	editParticipant: '/editParticipant/:number',
+	editFight: '/editFight/:number',
+	fightReport: '/fightReport/:number',
+	reports: '/reports',
+	report: '/report/:number',
 }

@@ -1,0 +1,79 @@
+$color-button-primary: #e3c30e;
+$color-font-button-primary: #ffffff;
+$color-button-secondary: #000000;
+$color-font-button-secondary: #b3b3b3;
+
+
+.fullDiv {
+  height: 100%;
+  width: 100%;
+  background-image: url('../../img/rycerz.jpg');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  //justify-content: center;
+  flex-direction: column; /* Centers the content vertically */
+}
+
+.transDiv {
+  width: 60%;
+  padding: 2rem;
+  border-radius: 16px;
+  opacity: 100%;
+  
+}
+
+.headerUp {
+  margin-bottom: 2rem;
+  font-size: 500%;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bolder;
+  color: $color-button-primary;
+  text-align: center;
+}
+
+.addButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.mainDiv {
+  background-color: whitesmoke;
+  margin-top: 1rem;
+  padding: 1rem;
+  outline: 3px solid #b3b3b3;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  position: relative; /* Position the button absolutely within this container */
+  padding-right: 3rem; /* Ensure there's space for the button */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 1rem; /* Adds space between text and button */
+}
+
+.header2 {
+  color: $color-font-button-secondary;
+  flex: 1; /* Allow the text to take available space */
+}
+
+.deleteButton {
+  position: absolute; /* Position absolutely within the mainDiv */
+  right: 1rem; /* Distance from the right border */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Center vertically with respect to the button */
+}
+
+
+.mainDiv:hover {
+  outline: 3px solid $color-button-primary;
+}
+
+.header2:hover {
+  color: $color-button-primary;
+}

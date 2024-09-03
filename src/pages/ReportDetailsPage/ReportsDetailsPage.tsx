@@ -1,33 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
-import s from './FightDetailsPage.module.scss';
-import { sendRequestGET } from 'requests';
-import { Link, useParams } from 'react-router-dom';
+import s from './ReportsDetailsPage.module.scss';
+import { sendRequestGET, sendEmptyRequestPOST } from 'requests';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import {SwordLinkButton} from "../../components/SwordLinkButton";
 import {SwordLinkButtonAlt} from "../../components/SwordLinkButtonAlt";
 import {PATHS} from "../../config/paths";
+import { SwordButtonPopup } from 'components/SwordButtonPopup';
 
-export const FightDetailsPage = () => {
-    const [fightDetails, setFightDetails] = useState(null);
+export const ReportDetailsPage = () => {
+    const [reportDetails, setReportDetails] = useState(null);
+    const [firstParticipant, setFirstParticipant] = useState(null);
+    const [secondParticipant, setSecondParticipant] = useState(null);
+    const [sinner, setWinner] = useState(null);
+    const redirect = useNavigate();
+
+
 
     const { number } = useParams();
 
     useEffect(() => {
-        sendRequestGET('fights/getOne/'+number)
+        sendRequestGET('reports/get/'+number)
         .then(async response => {
-            const fightData = await response.json();
-            setFightDetails(fightData);
+            const reportData = await response.json();
+            setReportDetails(reportData);
         })
-        .catch(err => console.error("Error fetching tournament:", err));
+        .catch(err => console.error("Error fetching report:", err));
     }, []);
 
-    if (!fightDetails) {
+    useEffect(() => {
+        console.log("DUPA")
+        if (reportDetails) {
+            console.log("CHUJ")
+
+            sendRequestGET('participants/get/' + reportDetails.firstParticipantId)
+                .then(async (response) => {
+                    const participantData = await response.json();
+                    setFirstParticipant(participantData);
+                })
+                .catch(err => console.error("Error fetching first participant:", err));
+
+            sendRequestGET('participants/get/' + reportDetails.secondParticipantId)
+                .then(async (response) => {
+                    const participantData = await response.json();
+                    setSecondParticipant(participantData);
+                })
+                .catch(err => console.error("Error fetching second participant:", err));
+            sendRequestGET('participants/get/' + reportDetails.winnerId)
+                .then(async (response) => {
+                    const participantData = await response.json();
+                    setWinner(participantData);
+                })
+                .catch(err => console.error("Error fetching second participant:", err));
+        }
+    }, [reportDetails]);
+
+    if (!reportDetails) {
         return <div>Loading...</div>;
     }
 
+    async function acceptReport(){
+		let response = sendEmptyRequestPOST('reports/accept/'+number)
+        .then(async r => {
+			if (r.ok) {
+				redirect(PATHS.participant.replace(":number", number))
+			}
+			else {
+				alert("Nie udało się dokonać zmian");
+			}
+		})
+
+	}
+
     const {
-        firstParticipant,
-        secondParticipant,
         firstParticipantPoints = 0,
         secondParticipantPoints = 0,
         firstParticipantCards = 0,
@@ -35,33 +80,13 @@ export const FightDetailsPage = () => {
         doubles = 0,
         status = "PENDING",
         winner
-    } = fightDetails;
-
-    const renderParticipantBox = (participant: any, points: number, cards: number) => {
-        const participantContent = (
-            <div className={s.participantBox}>
-                <h2>{participant?.fullName || "Oczekujący"}</h2>
-                <p>Points: {points}</p>
-                <p>Cards: {cards}</p>
-            </div>
-        );
-
-        if (participant) {
-            return (
-                <Link to={`/participant/${participant.participantId}`}>
-                    {participantContent}
-                </Link>
-            );
-        }
-
-        return participantContent;
-    };
+    } = reportDetails;
 
     return (
         <div className={s.background}>
             <div className={s.transDiv}>
                 <div className={s.fightDetailsContainer}>
-                    <h1 className={s.header}>Szczegóły Walki nr {fightDetails.id}</h1>
+                    <h1 className={s.header}>Raport walki: {reportDetails.fightId} Autor: {reportDetails.username}</h1>
                     <div className={s.participantInfo}>
                         {firstParticipant ? (
                             <Link to={`/participant/${firstParticipant.participantId}`} className={s.participantBox}>
@@ -102,12 +127,10 @@ export const FightDetailsPage = () => {
                 <h1><br></br></h1>
                 <h1><br></br></h1>
                 <div className={s.addButtonContainer}>
-                <SwordLinkButton href={`${PATHS.editFight.replace(':number', number)}`}>Edytuj</SwordLinkButton>
-                </div>
-                <h1><br></br></h1>
-                <div className={s.addButtonContainer}>
-                <SwordLinkButton href={`${PATHS.fightReport.replace(':number', number)}`}>Dodaj raport</SwordLinkButton>
-                </div>
+                <SwordButtonPopup onClick={() => acceptReport()} className={s.addButton}>
+                   Akceptuj raport
+                </SwordButtonPopup>
+            </div>
             </div>
         </div>
 

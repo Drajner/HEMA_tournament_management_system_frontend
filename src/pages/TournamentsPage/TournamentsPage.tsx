@@ -7,7 +7,7 @@ import {sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendRequestDELETE}
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
 import { SwordPopup } from 'components/SwordPopup';
 import { SwordConfirmPopup } from 'components/SwordConfirmPopup'; 
-import { SwordButton } from 'components/SwordButton';
+import { SwordLinkButton } from 'components/SwordLinkButton';
 
 export const TournamentPage = () => {
 	const [tournaments, setTournaments] = useState([]);
@@ -85,6 +85,11 @@ export const TournamentPage = () => {
                 </SwordButtonPopup>
 				</div>
 			))}
+			<h1><br/></h1>
+			<h1><br/></h1>
+			<div className={s.addButtonContainer}>
+			<SwordLinkButton href={`${PATHS.reports}`}>Raporty</SwordLinkButton>
+			</div>
 			<SwordPopup
 				isOpen={isPopupOpen}
 				onClose={() => setIsPopupOpen(false)}
