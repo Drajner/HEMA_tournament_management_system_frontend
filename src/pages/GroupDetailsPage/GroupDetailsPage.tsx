@@ -243,7 +243,7 @@ export const GroupDetailsPage = () => {
           <div className={s.contentRow}>
             <div className={s.addButtonContainer}>
               <SwordButtonPopup onClick={() => openAddFightPopup()} className={s.addButton}>
-                Dodaj zawodnika
+                Dodaj walkę
               </SwordButtonPopup>
             </div>
             {fights.map((fight: any, index: number) => (

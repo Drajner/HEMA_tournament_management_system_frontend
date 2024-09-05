@@ -62,7 +62,7 @@ export const FightReportPage = () => {
     async function editFight() {
         sendRequestPOST(
             { 
-                "username": "TODO",
+                "username": "UNKNOWN",
                 "fightId": number,
                 "firstParticipantId": fightDetails.firstParticipant.participantId,
                 "secondParticipantId": fightDetails.secondParticipant.participantId,

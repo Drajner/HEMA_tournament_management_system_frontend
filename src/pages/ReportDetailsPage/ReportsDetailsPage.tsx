@@ -29,29 +29,34 @@ export const ReportDetailsPage = () => {
     }, []);
 
     useEffect(() => {
-        console.log("DUPA")
         if (reportDetails) {
-            console.log("CHUJ")
 
-            sendRequestGET('participants/get/' + reportDetails.firstParticipantId)
-                .then(async (response) => {
-                    const participantData = await response.json();
-                    setFirstParticipant(participantData);
-                })
-                .catch(err => console.error("Error fetching first participant:", err));
+            if(reportDetails.firstParticipantId != undefined && reportDetails.firstParticipantId != null){
+                sendRequestGET('participants/get/' + reportDetails.firstParticipantId)
+                    .then(async (response) => {
+                        const participantData = await response.json();
+                        setFirstParticipant(participantData);
+                    })
+                    .catch(err => console.error("Error fetching first participant:", err));
+            }
 
-            sendRequestGET('participants/get/' + reportDetails.secondParticipantId)
-                .then(async (response) => {
-                    const participantData = await response.json();
-                    setSecondParticipant(participantData);
-                })
-                .catch(err => console.error("Error fetching second participant:", err));
-            sendRequestGET('participants/get/' + reportDetails.winnerId)
-                .then(async (response) => {
-                    const participantData = await response.json();
-                    setWinner(participantData);
-                })
-                .catch(err => console.error("Error fetching second participant:", err));
+            if(reportDetails.secondParticipantId != undefined && reportDetails.secondParticipantId != null){
+                sendRequestGET('participants/get/' + reportDetails.secondParticipantId)
+                    .then(async (response) => {
+                        const participantData = await response.json();
+                        setSecondParticipant(participantData);
+                    })
+                    .catch(err => console.error("Error fetching second participant:", err));
+            }
+
+            if(reportDetails.winnerId != undefined && reportDetails.winnerId != null){
+                sendRequestGET('participants/get/' + reportDetails.winnerId)
+                    .then(async (response) => {
+                        const participantData = await response.json();
+                        setWinner(participantData);
+                    })
+                    .catch(err => console.error("Error fetching second participant:", err));
+                }
         }
     }, [reportDetails]);
 
