@@ -74,9 +74,9 @@ export const ParticipantDetailsPage: React.FC = () => {
                 <h1><br></br></h1>
                 <h1><br></br></h1>
                 <div className={s.addButtonContainer}>
-                <SwordLinkButton href={`${PATHS.editParticipant.replace(':number', number)}`}>Edytuj</SwordLinkButton>
+                <SwordLinkButton href={`${PATHS.editParticipant.replace(':number', number || "")}`}>Edytuj</SwordLinkButton>
                 </div>
             </div>
         </div>
     );
-};
+}; 

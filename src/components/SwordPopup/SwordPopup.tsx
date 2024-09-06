@@ -5,7 +5,7 @@ import s from './SwordPopup.module.scss';
 interface SwordPopupProps {
     isOpen: boolean;
     onClose: () => void;
-    onAccept: () => void;
+    onAccept: (inputValue: string) => void;
     title: string;
     prompt: string;
   }

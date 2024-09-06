@@ -13,7 +13,7 @@ export const GroupDetailsPage = () => {
   const [participants, setParticipants] = useState([]);
   const [fights, setFights] = useState([]);
   const [isParticipantDeletePopupOpen, setIsParticipantDeletePopupOpen] = useState(false);
-  const [participantToDelete, setParticipantToDelete] = useState<number | null>(null);
+  const [participantToDelete, setParticipantToDelete] = useState<any>(null);
   const [isFightDeletePopupOpen, setIsFightDeletePopupOpen] = useState(false);
   const [fightToDelete, setFightToDelete] = useState<number | null>(null);
   const [isAddParticipantPopupOpen, setIsAddParticipantPopupOpen] = useState(false);

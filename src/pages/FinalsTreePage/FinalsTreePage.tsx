@@ -7,8 +7,35 @@ import { SwordLinkButton } from 'components/SwordLinkButton';
 import { SwordLinkButtonAlt } from 'components/SwordLinkButtonAlt';
 import {PATHS} from "../../config/paths";
 
+interface Participant {
+  fullName: string;
+}
 
-const FightNode = ({ fightNode, level = 0 }) => {
+interface Fight {
+  id: string;
+  firstParticipant?: Participant;
+  secondParticipant?: Participant;
+}
+
+interface FightNodeType {
+  fight: Fight;
+  firstChildNode?: FightNodeType;
+  secondChildNode?: FightNodeType;
+}
+
+interface FinalsData {
+  fight: Fight;
+  firstParticipant?: Participant;
+  secondParticipant?: Participant;
+}
+
+interface FightNodeProps {
+  fightNode: FightNodeType | undefined;
+  level?: number;
+}
+
+
+const FightNode: React.FC<FightNodeProps> = ({ fightNode, level = 0 }) => {
   if (!fightNode) return null;
 
   const fight = fightNode.fight;
@@ -32,14 +59,18 @@ const FightNode = ({ fightNode, level = 0 }) => {
   );
 };
 
-const FinalsTree = ({ data }) => {
+interface FinalsTreeProps {
+  data: [FightNodeType, FightNodeType];
+}
+
+const FinalsTree: React.FC<FinalsTreeProps> = ({ data }) => {
   if (!data) return <div>Brak dostępnych finałów</div>;
 
   const [finals, thirdPlace] = data;
-  const firstFinalsParticipant = finals?.firstParticipant?.fullName || "Oczekujący";
-  const secondFinalsParticipant = finals?.secondParticipant?.fullName || "Oczekujący";
-  const firstThirdPlaceParticipant = thirdPlace?.firstParticipant?.fullName || "Oczekujący";
-  const secondThirdPlaceParticipant = thirdPlace?.secondParticipant?.fullName || "Oczekujący";
+  const firstFinalsParticipant = finals?.fight.firstParticipant?.fullName || "Oczekujący";
+  const secondFinalsParticipant = finals?.fight.secondParticipant?.fullName || "Oczekujący";
+  const firstThirdPlaceParticipant = thirdPlace?.fight.firstParticipant?.fullName || "Oczekujący";
+  const secondThirdPlaceParticipant = thirdPlace?.fight.secondParticipant?.fullName || "Oczekujący";
 
   return (
     <div style={{ overflowX: 'auto', width: '100%' }}>
@@ -76,7 +107,7 @@ const FinalsTree = ({ data }) => {
 };
 
 export const FinalsTreePage = () => {
-  const [finals, setFinals] = useState(null);
+  const [finals, setFinals] = useState<[FinalsData, FinalsData] | null>(null); // finals is a tuple
   const { number } = useParams();
 
   useEffect(() => {

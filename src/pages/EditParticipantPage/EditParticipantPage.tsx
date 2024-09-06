@@ -68,7 +68,10 @@ export const EditParticipantPage: React.FC = () => {
             setter(e.target.value);
         };
 
-    
+    const handleSelectChange = (setter: React.Dispatch<React.SetStateAction<any>>) => 
+        (e: React.ChangeEvent<HTMLSelectElement>) => {
+            setter(e.target.value);
+        };
 
 	async function editParticipant(){
         console.log(name);
@@ -85,7 +88,7 @@ export const EditParticipantPage: React.FC = () => {
             },
 			'participants/replace'
 		).then(async r => {
-			if (r.ok) {
+			if (r.ok && number != null) {
                 fetchData();
 				redirect(PATHS.participant.replace(":number", number))
 			}
@@ -134,7 +137,7 @@ export const EditParticipantPage: React.FC = () => {
                                 <span>Status:</span>
                                 <select 
                                     value={status} 
-                                    onChange={handleInputChange(setStatus)}
+                                    onChange={handleSelectChange(setStatus)}
                                 >
                                     <option value="COMPETING">COMPETING</option>
                                     <option value="ELIMINATED">ELIMINATED</option>

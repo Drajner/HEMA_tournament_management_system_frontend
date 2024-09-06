@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import s from './SwordDoubleDroplistPopup.module.scss';
 
 
+interface Participant {
+    participantId: number;
+    fullName: string;
+}
+
 interface SwordDoubleDroplistPopupProps {
     isOpen: boolean;
     onClose: () => void;
-    onAccept: (firstParticipant: any | null, secondParticipant: any | null) => void;
+    onAccept: (firstParticipant: Participant | null, secondParticipant: Participant | null) => void;
     title: string;
-    participants: [];
+    participants: Participant[];
 }
 
 export const SwordDoubleDroplistPopup: React.FC<SwordDoubleDroplistPopupProps> = ({

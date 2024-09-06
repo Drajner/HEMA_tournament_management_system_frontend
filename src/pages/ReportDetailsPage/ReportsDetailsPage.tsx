@@ -9,15 +9,12 @@ import {PATHS} from "../../config/paths";
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
 
 export const ReportDetailsPage = () => {
-    const [reportDetails, setReportDetails] = useState(null);
-    const [firstParticipant, setFirstParticipant] = useState(null);
-    const [secondParticipant, setSecondParticipant] = useState(null);
-    const [sinner, setWinner] = useState(null);
+    const [reportDetails, setReportDetails] = useState<any>(null);
+    const [firstParticipant, setFirstParticipant] = useState<any>(null);
+    const [secondParticipant, setSecondParticipant] = useState<any>(null);
+    const [winner, setWinner] = useState<any>(null);
     const redirect = useNavigate();
-
-
-
-    const { number } = useParams();
+    const { number } = useParams<string>();
 
     useEffect(() => {
         sendRequestGET('reports/get/'+number)
@@ -68,7 +65,7 @@ export const ReportDetailsPage = () => {
 		let response = sendEmptyRequestPOST('reports/accept/'+number)
         .then(async r => {
 			if (r.ok) {
-				redirect(PATHS.participant.replace(":number", number))
+				redirect(PATHS.participant.replace(":number", number || ''))
 			}
 			else {
 				alert("Nie udało się dokonać zmian");
@@ -84,7 +81,6 @@ export const ReportDetailsPage = () => {
         secondParticipantCards = 0,
         doubles = 0,
         status = "PENDING",
-        winner
     } = reportDetails;
 
     return (

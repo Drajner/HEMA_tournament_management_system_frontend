@@ -49,7 +49,7 @@ export const LoginPageParticipant: React.FC = () => {
 						<SwordButton type="submit">Zaloguj się</SwordButton>
 						<p className={s.signInCaption}>
 							Nie masz konta?{" "}
-							<Link to={PATHS.TODO}><b>Zarejestruj się</b></Link>
+							<Link to={PATHS.register}><b>Zarejestruj się</b></Link>
 						</p>
 					</form>
 				</div>

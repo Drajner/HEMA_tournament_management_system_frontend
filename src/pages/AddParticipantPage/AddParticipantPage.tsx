@@ -19,18 +19,22 @@ export const AddParticipantPage: React.FC = () => {
 
     const { number } = useParams();
 
-	async function addParticipant(data: FieldValues){
-		let response = sendRequestPOST(
-			{"name": data.name, "surname": data.surname, "teamName": data.teamName},
-			'participants/add/tournament/'+number
-		).then(async r => {
-			if (r.ok) {
-				redirect(PATHS.tournamentDetails.replace(':number', number))
+	async function addParticipant(data: FieldValues) {
+		try {
+			const response = await sendRequestPOST(
+				{ "name": data.name, "surname": data.surname, "teamName": data.teamName },
+				'participants/add/tournament/' + number
+			);
+	
+			if (response.ok && number != null) {
+				redirect(PATHS.tournamentDetails.replace(':number', number));
+			} else {
+				setIsFailOpen(true);
 			}
-			else {
-				setIsFailOpen(true)
-			}
-		})
+		} catch (error) {
+			setIsFailOpen(true);
+			console.error("Error adding participant:", error);
+		}
 	}
 
 	return (

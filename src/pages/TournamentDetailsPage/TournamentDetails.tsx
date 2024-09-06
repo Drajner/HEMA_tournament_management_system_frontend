@@ -16,7 +16,7 @@ import { SwordIntPopup } from 'components/SwordIntPopup';
 export const TournamentDetailsPage = () => {
   const [participants, setParticipants] = useState([]);
   const [groups, setGroups] = useState([]);
-  const [tournament, setTournament] = useState([]);
+  const [tournament, setTournament] = useState<any>([]);
   const [isGroupDeletePopupOpen, setIsGroupDeletePopupOpen] = useState(false);
   const [groupToDelete, setGroupToDelete] = useState<number | null>(null);
   const [isParticipantDeletePopupOpen, setIsParticipantDeletePopupOpen] = useState(false);
@@ -235,7 +235,7 @@ export const TournamentDetailsPage = () => {
           <h1><br></br></h1>
           <h1><br></br></h1>
           <div className={s.addButtonContainer}>
-          <SwordLinkButton href={`${PATHS.finals.replace(':number', number)}`}>Finały</SwordLinkButton>
+          <SwordLinkButton href={`${PATHS.finals.replace(':number', number || "")}`}>Finały</SwordLinkButton>
           </div>
           <h1 className={s.headerUp}>Funkcje turnieju</h1>
           <h1><br></br></h1>

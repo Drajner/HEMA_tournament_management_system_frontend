@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import s from './SwordDroplistPopup.module.scss';
 
+interface Participant {
+    participantId: number;
+    fullName: string;
+}
+
 interface SwordDroplistPopupProps {
     isOpen: boolean;
     onClose: () => void;
-    onAccept: (selectedParticipant: any | null) => void;
+    onAccept: (selectedParticipant: Participant | null) => void;
     title: string;
-    participants: []; // List of participants objects
+    participants: Participant[];
 }
 
 export const SwordDroplistPopup: React.FC<SwordDroplistPopupProps> = ({

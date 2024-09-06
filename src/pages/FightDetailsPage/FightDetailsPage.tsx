@@ -7,8 +7,26 @@ import {SwordLinkButton} from "../../components/SwordLinkButton";
 import {SwordLinkButtonAlt} from "../../components/SwordLinkButtonAlt";
 import {PATHS} from "../../config/paths";
 
+interface Participant {
+    participantId: number;
+    fullName: string;
+}
+
+interface FightDetails {
+    id: number;
+    firstParticipant: Participant | null;
+    secondParticipant: Participant | null;
+    firstParticipantPoints?: number;
+    secondParticipantPoints?: number;
+    firstParticipantCards?: number;
+    secondParticipantCards?: number;
+    doubles?: number;
+    status?: string;
+    winner?: Participant | null;
+}
+
 export const FightDetailsPage = () => {
-    const [fightDetails, setFightDetails] = useState(null);
+    const [fightDetails, setFightDetails] = useState<FightDetails | null>(null);;
 
     const { number } = useParams();
 
@@ -102,11 +120,11 @@ export const FightDetailsPage = () => {
                 <h1><br></br></h1>
                 <h1><br></br></h1>
                 <div className={s.addButtonContainer}>
-                <SwordLinkButton href={`${PATHS.editFight.replace(':number', number)}`}>Edytuj</SwordLinkButton>
+                <SwordLinkButton href={`${PATHS.editFight.replace(':number', number || '')}`}>Edytuj</SwordLinkButton>
                 </div>
                 <h1><br></br></h1>
                 <div className={s.addButtonContainer}>
-                <SwordLinkButton href={`${PATHS.fightReport.replace(':number', number)}`}>Dodaj raport</SwordLinkButton>
+                <SwordLinkButton href={`${PATHS.fightReport.replace(':number', number || '')}`}>Dodaj raport</SwordLinkButton>
                 </div>
             </div>
         </div>

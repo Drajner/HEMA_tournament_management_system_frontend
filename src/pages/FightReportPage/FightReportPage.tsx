@@ -5,9 +5,29 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
 import { PATHS } from 'config/paths';
 
+interface Participant {
+    participantId: number;
+    fullName: string;
+}
+
+interface FightDetails {
+    id: number;
+    firstParticipant: Participant | null;
+    secondParticipant: Participant | null;
+    firstParticipantPoints?: number;
+    secondParticipantPoints?: number;
+    firstParticipantCards?: number;
+    secondParticipantCards?: number;
+    doubles?: number;
+    status?: string;
+    winner?: Participant | null;
+    groupId?: number;
+}
+
+
 export const FightReportPage = () => {
-    const [fightDetails, setFightDetails] = useState(null);
-    const [participants, setParticipants] = useState([]);
+    const [fightDetails, setFightDetails] = useState<FightDetails | null>(null);
+    const [participants, setParticipants] = useState<Participant[]>([]);
     const redirect = useNavigate();
     const { number } = useParams();
 
@@ -55,7 +75,7 @@ export const FightReportPage = () => {
         }
     };
 
-    const handleInputChange = (setter) => (e) => {
+    const handleInputChange = (setter:any) => (e:any) => {
         setter(e.target.value);
     };
 
@@ -64,8 +84,8 @@ export const FightReportPage = () => {
             { 
                 "username": "UNKNOWN",
                 "fightId": number,
-                "firstParticipantId": fightDetails.firstParticipant.participantId,
-                "secondParticipantId": fightDetails.secondParticipant.participantId,
+                "firstParticipantId": fightDetails?.firstParticipant?.participantId,
+                "secondParticipantId": fightDetails?.secondParticipant?.participantId,
                 "firstParticipantPoints": firstParticipantPoints,
                 "secondParticipantPoints": secondParticipantPoints,
                 "firstParticipantCards": firstParticipantCards,
@@ -78,7 +98,7 @@ export const FightReportPage = () => {
             if (r.ok) {
                 fetchFight();
                 fetchParticipants();
-                redirect(PATHS.fight.replace(":number", number));
+                redirect(PATHS.fight.replace(":number", number || ''));
             } else {
                 alert("Nie udało się dokonać zmian");
             }
@@ -162,7 +182,7 @@ export const FightReportPage = () => {
                     <label>
                         <span>Zwycięzca:</span>
                         <select
-                            value={winnerId}
+                            value={winnerId || ""}
                             onChange={handleInputChange(setWinnerId)}
                         >
                             <option value="">Nierozstrzygnięty</option>
