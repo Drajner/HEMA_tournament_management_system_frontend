@@ -73,7 +73,6 @@ export const EditParticipantPage: React.FC = () => {
         };
 
 	async function editParticipant(){
-        console.log(name);
 		let response = sendRequestPOST(
 			{   "participantId": number,
                 "name": name, 

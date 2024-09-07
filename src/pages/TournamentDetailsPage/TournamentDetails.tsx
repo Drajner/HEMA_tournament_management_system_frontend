@@ -63,7 +63,6 @@ export const TournamentDetailsPage = () => {
 
   const handleAddGroup = () => {
 		sendEmptyRequestPOST('tournaments/addPool/'+number).then(async r => {
-      console.log(r);
 		  if (r.ok) {
 			fetchData();
 		  } else {
@@ -166,7 +165,7 @@ export const TournamentDetailsPage = () => {
   return (
     <TemplatePage>
       <div className={s.fullDiv}>
-      <h1 className={s.headerUp}>{tournament.name ? tournament.name : "CHUUUJ"}</h1>
+      <h1 className={s.headerUp}>{tournament.name ? tournament.name : "Turniej"}</h1>
         <div className={s.transDiv}>
           <h1 className={s.headerUp}>Zawodnicy</h1>
           <h1><br></br></h1>

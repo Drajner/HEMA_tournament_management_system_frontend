@@ -114,7 +114,6 @@ export const FinalsTreePage = () => {
     sendUnauthRequestGET(`tournaments/getFinals/${number}`)
       .then(async response => {
         const finalsData = await response.json();
-        console.log("Fetched finals data:", finalsData);
         setFinals(finalsData);
       })
       .catch(err => console.error("Error fetching finals:", err));

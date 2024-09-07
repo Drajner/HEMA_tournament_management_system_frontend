@@ -30,7 +30,6 @@ export const GroupDetailsPage = () => {
   const { number } = useParams();
 
   const fetchData = () => {
-	  console.log("number: "+number);
     sendUnauthRequestGET('participants/get/group/'+number)
       .then(async response => {
         const participantsData = await response.json();
