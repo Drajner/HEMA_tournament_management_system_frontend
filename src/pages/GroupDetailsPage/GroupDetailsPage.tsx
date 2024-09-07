@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
 import s from "./GroupDetailsPage.module.scss";
-import { sendRequestGET, sendRequestDELETE, sendBareRequestDELETE, sendRequestPOST, sendBareRequestPOST, sendEmptyRequestPOST } from 'requests';
+import { sendRequestGET, sendRequestDELETE, sendBareRequestDELETE, sendRequestPOST, sendBareRequestPOST, sendEmptyRequestPOST, sendUnauthRequestGET } from 'requests';
 import { Link, useParams } from 'react-router-dom';
 import { SwordConfirmPopup } from 'components/SwordConfirmPopup';
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
@@ -25,26 +25,27 @@ export const GroupDetailsPage = () => {
   const [isGeneratePopupOpen, setIsGeneratePopupOpen] = useState(false);
   const [isModifierPopupOpen, setIsModifierPopupOpen] = useState(false);
 
+  const [role, setRole] = useState<string | null>(null);
 
   const { number } = useParams();
 
   const fetchData = () => {
 	  console.log("number: "+number);
-    sendRequestGET('participants/get/group/'+number)
+    sendUnauthRequestGET('participants/get/group/'+number)
       .then(async response => {
         const participantsData = await response.json();
         setParticipants(participantsData);
       })
       .catch(err => console.error("Error fetching participants:", err));
 
-    sendRequestGET('fights/get/'+number)
+    sendUnauthRequestGET('fights/get/'+number)
       .then(async response => {
         const groupsData = await response.json();
         setFights(groupsData);
       })
       .catch(err => console.error("Error fetching groups:", err));
 
-    sendRequestGET('groups/getOne/'+number)
+    sendUnauthRequestGET('groups/getOne/'+number)
       .then(async response => {
         const groupData = await response.json();
         setTournamentNumber(groupData.tournamentId);
@@ -55,9 +56,7 @@ export const GroupDetailsPage = () => {
 	};
 
   const fetchTournamentParticipants = () => {
-    console.log(`DUPA ${tournamentNumber}`);
-
-    sendRequestGET('participants/get/tournament/'+tournamentNumber)
+    sendUnauthRequestGET('participants/get/tournament/'+tournamentNumber)
       .then(async response => {
         const tpData = await response.json();
         setTournamentParticipants(tpData);
@@ -66,6 +65,7 @@ export const GroupDetailsPage = () => {
   }
 
   useEffect(() => {
+    setRole(localStorage.getItem("role"))
     fetchData();
   }, []);
 
@@ -96,7 +96,6 @@ export const GroupDetailsPage = () => {
   };
 
   const handleAddParticipant = (participant: any) => {
-    console.log(participant)
     sendBareRequestPOST(participant.participantId, `groups/addParticipant/${number}`).then(async r => {
       if (r.ok) {
       fetchData();
@@ -202,11 +201,14 @@ export const GroupDetailsPage = () => {
           <h1><br></br></h1>
           <h1><br></br></h1>
           <div className={s.contentRow}>
+            {role === 'ADMIN' && ( 
             <div className={s.addButtonContainer}>
               <SwordButtonPopup onClick={() => openAddParticipantPopup()} className={s.addButton}>
                 Dodaj zawodnika
               </SwordButtonPopup>
             </div>
+            )}
+
             {participants.map((participant: any) => (
               <div key={participant.id} className={s.mainDiv}>
                 <Link to={`/participant/${participant.participantId}`}>
@@ -223,6 +225,7 @@ export const GroupDetailsPage = () => {
                   </div>
                 </div>
                 </Link>
+                {role === 'ADMIN' && ( 
                 <SwordButtonPopup
                     className={s.deleteButton}
                     onClick={() => openParticipantDeletePopup(participant.participantId)}
@@ -230,6 +233,7 @@ export const GroupDetailsPage = () => {
         	        >
                     Usuń
                 </SwordButtonPopup>
+                )}
               </div>
             ))}
           </div>
@@ -241,11 +245,14 @@ export const GroupDetailsPage = () => {
           <h1><br></br></h1>
           <h1><br></br></h1>
           <div className={s.contentRow}>
+
+            {role === 'ADMIN' && ( 
             <div className={s.addButtonContainer}>
               <SwordButtonPopup onClick={() => openAddFightPopup()} className={s.addButton}>
                 Dodaj walkę
               </SwordButtonPopup>
             </div>
+            )}
             {fights.map((fight: any, index: number) => (
               <div key={fight.id} className={s.mainDiv}>
                 <div className={s.header}>
@@ -253,6 +260,8 @@ export const GroupDetailsPage = () => {
                   <h2 className={s.header2}>WALKA {index + 1}: {fight.firstParticipant.fullName} vs {fight.secondParticipant.fullName} {fight.firstParticipantPoints}:{fight.secondParticipantPoints}</h2>
                   </Link>
                 </div>
+
+                {role === 'ADMIN' && ( 
                 <SwordButtonPopup
                     className={s.deleteButton}
                     onClick={() => openFightDeletePopup(fight.id)}
@@ -260,9 +269,13 @@ export const GroupDetailsPage = () => {
         	        >
                     Usuń
                 </SwordButtonPopup>
+                )}
               </div>
             ))}
           </div>
+
+          {role === 'ADMIN' && ( 
+          <>
           <h1 className={s.headerUp}>Funkcje grupy</h1>
           <h1><br></br></h1>
           <h1><br></br></h1>
@@ -334,6 +347,8 @@ export const GroupDetailsPage = () => {
                 title="Wygeneruj walki"
                 text="Ta opcja wygeneruje walki pomiędzy wszystkimi zawodnikami. Czy jesteś pewny/a, że chcesz wygenerować walki?"
             />
+          </>
+          )}
         </div>
       </div>
     </TemplatePage>

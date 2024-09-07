@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import s from './FightReportPage.module.scss';
-import { sendRequestGET, sendRequestPOST } from 'requests';
+import { sendRequestGET, sendRequestPOST, sendUnauthRequestGET } from 'requests';
 import { useParams, useNavigate } from 'react-router-dom';
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
 import { PATHS } from 'config/paths';
@@ -48,7 +48,7 @@ export const FightReportPage = () => {
     }, [groupId]);
 
     const fetchFight = () => {
-        sendRequestGET('fights/getOne/' + number)
+        sendUnauthRequestGET('fights/getOne/' + number)
             .then(async response => {
                 const fightData = await response.json();
                 setFightDetails(fightData);
@@ -66,7 +66,7 @@ export const FightReportPage = () => {
 
     const fetchParticipants = () => {
         if (groupId) {
-            sendRequestGET(`participants/get/group/${groupId}`)
+            sendUnauthRequestGET(`participants/get/group/${groupId}`)
                 .then(async response => {
                     const participantData = await response.json();
                     setParticipants(participantData);

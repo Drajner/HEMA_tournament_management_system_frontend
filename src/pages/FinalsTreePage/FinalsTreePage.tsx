@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
 import s from "./FinalsTreePage.module.scss";
-import { sendRequestGET } from 'requests';
+import { sendRequestGET, sendUnauthRequestGET } from 'requests';
 import { Link, useParams } from 'react-router-dom';
 import { SwordLinkButton } from 'components/SwordLinkButton';
 import { SwordLinkButtonAlt } from 'components/SwordLinkButtonAlt';
@@ -107,11 +107,11 @@ const FinalsTree: React.FC<FinalsTreeProps> = ({ data }) => {
 };
 
 export const FinalsTreePage = () => {
-  const [finals, setFinals] = useState<[FinalsData, FinalsData] | null>(null); // finals is a tuple
+  const [finals, setFinals] = useState<[FinalsData, FinalsData] | null>(null);
   const { number } = useParams();
 
   useEffect(() => {
-    sendRequestGET(`tournaments/getFinals/${number}`)
+    sendUnauthRequestGET(`tournaments/getFinals/${number}`)
       .then(async response => {
         const finalsData = await response.json();
         console.log("Fetched finals data:", finalsData);
@@ -123,10 +123,12 @@ export const FinalsTreePage = () => {
   return (
     <TemplatePage>
       <div className={s.fullDiv}>
-        <h1 className={s.headerUp}>Drabinka finałowa</h1>
+        <h1 className={s.headerUp}>
+          {finals?.[0] ? <p>Drabinka finałowa</p> : <p>Brak drabinki finałowej</p>}
+        </h1>
         <h1><br></br></h1>
         <h1><br></br></h1>
-        {finals ? <FinalsTree data={finals} /> : <p>Loading...</p>}
+        {finals?.[0] ? <FinalsTree data={finals} /> : <p></p>}
       </div>
     </TemplatePage>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
 import s from './ReportsDetailsPage.module.scss';
-import { sendRequestGET, sendEmptyRequestPOST } from 'requests';
+import { sendRequestGET, sendEmptyRequestPOST, sendUnauthRequestGET } from 'requests';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import {SwordLinkButton} from "../../components/SwordLinkButton";
 import {SwordLinkButtonAlt} from "../../components/SwordLinkButtonAlt";
@@ -16,8 +16,11 @@ export const ReportDetailsPage = () => {
     const redirect = useNavigate();
     const { number } = useParams<string>();
 
+    const [role, setRole] = useState<string | null>(null);
+
     useEffect(() => {
-        sendRequestGET('reports/get/'+number)
+        setRole(localStorage.getItem("role"))
+        sendUnauthRequestGET('reports/get/'+number)
         .then(async response => {
             const reportData = await response.json();
             setReportDetails(reportData);
@@ -29,7 +32,7 @@ export const ReportDetailsPage = () => {
         if (reportDetails) {
 
             if(reportDetails.firstParticipantId != undefined && reportDetails.firstParticipantId != null){
-                sendRequestGET('participants/get/' + reportDetails.firstParticipantId)
+                sendUnauthRequestGET('participants/get/' + reportDetails.firstParticipantId)
                     .then(async (response) => {
                         const participantData = await response.json();
                         setFirstParticipant(participantData);
@@ -38,7 +41,7 @@ export const ReportDetailsPage = () => {
             }
 
             if(reportDetails.secondParticipantId != undefined && reportDetails.secondParticipantId != null){
-                sendRequestGET('participants/get/' + reportDetails.secondParticipantId)
+                sendUnauthRequestGET('participants/get/' + reportDetails.secondParticipantId)
                     .then(async (response) => {
                         const participantData = await response.json();
                         setSecondParticipant(participantData);
@@ -47,7 +50,7 @@ export const ReportDetailsPage = () => {
             }
 
             if(reportDetails.winnerId != undefined && reportDetails.winnerId != null){
-                sendRequestGET('participants/get/' + reportDetails.winnerId)
+                sendUnauthRequestGET('participants/get/' + reportDetails.winnerId)
                     .then(async (response) => {
                         const participantData = await response.json();
                         setWinner(participantData);
@@ -125,13 +128,17 @@ export const ReportDetailsPage = () => {
                         <p>Zwycięzca: {winner?.fullName || "Nierozstrzygnięty"}</p>
                     </div>
                 </div>
+                {role === 'ADMIN' && ( 
+                <>
                 <h1><br></br></h1>
                 <h1><br></br></h1>
                 <div className={s.addButtonContainer}>
                 <SwordButtonPopup onClick={() => acceptReport()} className={s.addButton}>
                    Akceptuj raport
                 </SwordButtonPopup>
-            </div>
+                </div>
+                </>
+                )}
             </div>
         </div>
 

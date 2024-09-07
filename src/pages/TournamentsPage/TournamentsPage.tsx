@@ -3,7 +3,7 @@ import {TemplatePage} from "templates/TemplatePage";
 import s from "./TournamentsPage.module.scss"
 import {Link, useNavigate} from "react-router-dom";
 import {PATHS} from "config/paths";
-import {sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendRequestDELETE} from 'requests';
+import {sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendRequestDELETE, sendUnauthRequestGET} from 'requests';
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
 import { SwordPopup } from 'components/SwordPopup';
 import { SwordConfirmPopup } from 'components/SwordConfirmPopup'; 
@@ -15,15 +15,18 @@ export const TournamentPage = () => {
 	const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
     const [tournamentToDelete, setTournamentToDelete] = useState<number | null>(null);
 
+	const [role, setRole] = useState<string | null>(null);
+
 	const fetchTournaments = () => {
-	  sendRequestGET('tournaments/get').then(async r => {
+	  sendUnauthRequestGET('tournaments/get').then(async r => {
 	    let response = await r.json();
 	    setTournaments(response);
 	  });
 	};
 
 	useEffect(() => {
-		fetchTournaments();  // Fetch tournaments on component mount
+		setRole(localStorage.getItem("role"))
+		fetchTournaments();
 	}, []);
 
 	const handleAddTournament = (inputString: string) => {
@@ -63,11 +66,15 @@ export const TournamentPage = () => {
 			<div className={s.transDiv}>
 			<h1 className={s.headerUp}>Turnieje</h1>
 			<h1><br/></h1>
-			<div className={s.addButtonContainer}>
-			<SwordButtonPopup onClick={() => setIsPopupOpen(true)} className={s.addButton}>
-				Utwórz turniej
-			</SwordButtonPopup>
-			</div>
+
+			{role === 'ADMIN' && ( 
+            <div className={s.addButtonContainer}>
+              <SwordButtonPopup onClick={() => setIsPopupOpen(true)} className={s.addButton}>
+                Utwórz turniej
+              </SwordButtonPopup>
+            </div>
+			)}
+
 			{tournaments.map((tournament: any) => (
 				<div className={s.mainDiv} key={tournament.tournamentId}>
 				<div className={s.header}>
@@ -76,6 +83,7 @@ export const TournamentPage = () => {
 					</Link>
 					
 				</div>
+				{role === 'ADMIN' && ( 
 				<SwordButtonPopup
                     className={s.deleteButton}
                     onClick={() => openConfirmPopup(tournament.tournamentId)}
@@ -83,6 +91,7 @@ export const TournamentPage = () => {
         	        >
                     Usuń
                 </SwordButtonPopup>
+				)}
 				</div>
 			))}
 			<h1><br/></h1>

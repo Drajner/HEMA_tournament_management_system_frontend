@@ -3,7 +3,7 @@ import {TemplatePage} from "templates/TemplatePage";
 import s from "./ReportsPage.module.scss"
 import {Link, useNavigate} from "react-router-dom";
 import {PATHS} from "config/paths";
-import {sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendRequestDELETE} from 'requests';
+import {sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendRequestDELETE, sendUnauthRequestGET} from 'requests';
 import { SwordButtonPopup } from 'components/SwordButtonPopup';
 import { SwordPopup } from 'components/SwordPopup';
 import { SwordConfirmPopup } from 'components/SwordConfirmPopup'; 
@@ -14,15 +14,17 @@ export const ReportsPage = () => {
 	const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
     const [reportToDelete, setReportToDelete] = useState<number | null>(null);
 
+	const [role, setRole] = useState<string | null>(null);
 
 	const fetchTournaments = () => {
-	  sendRequestGET('reports/get').then(async r => {
+	  sendUnauthRequestGET('reports/get').then(async r => {
 	    let response = await r.json();
 	    setReports(response);
 	  });
 	};
 
 	useEffect(() => {
+		setRole(localStorage.getItem("role"))
 		fetchTournaments();
 	}, []);
 
@@ -59,6 +61,7 @@ export const ReportsPage = () => {
 					</Link>
 					
 				</div>
+				{role === 'ADMIN' && ( 
 				<SwordButtonPopup
                     className={s.deleteButton}
                     onClick={() => openConfirmPopup(index)}
@@ -66,6 +69,7 @@ export const ReportsPage = () => {
         	        >
                     Usuń
                 </SwordButtonPopup>
+				)}
 				</div>
 			))}
 			<SwordConfirmPopup

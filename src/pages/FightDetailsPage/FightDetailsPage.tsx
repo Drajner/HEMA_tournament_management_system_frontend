@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
 import s from './FightDetailsPage.module.scss';
-import { sendRequestGET } from 'requests';
+import { sendRequestGET, sendUnauthRequestGET } from 'requests';
 import { Link, useParams } from 'react-router-dom';
 import {SwordLinkButton} from "../../components/SwordLinkButton";
 import {SwordLinkButtonAlt} from "../../components/SwordLinkButtonAlt";
@@ -27,11 +27,13 @@ interface FightDetails {
 
 export const FightDetailsPage = () => {
     const [fightDetails, setFightDetails] = useState<FightDetails | null>(null);;
+    const [role, setRole] = useState<string | null>(null);
 
     const { number } = useParams();
 
     useEffect(() => {
-        sendRequestGET('fights/getOne/'+number)
+        setRole(localStorage.getItem("role"))
+        sendUnauthRequestGET('fights/getOne/'+number)
         .then(async response => {
             const fightData = await response.json();
             setFightDetails(fightData);
@@ -117,15 +119,23 @@ export const FightDetailsPage = () => {
                         <p>Zwycięzca: {winner?.fullName || "Nierozstrzygnięty"}</p>
                     </div>
                 </div>
-                <h1><br></br></h1>
-                <h1><br></br></h1>
-                <div className={s.addButtonContainer}>
-                <SwordLinkButton href={`${PATHS.editFight.replace(':number', number || '')}`}>Edytuj</SwordLinkButton>
-                </div>
-                <h1><br></br></h1>
-                <div className={s.addButtonContainer}>
-                <SwordLinkButton href={`${PATHS.fightReport.replace(':number', number || '')}`}>Dodaj raport</SwordLinkButton>
-                </div>
+                {(role === 'ADMIN' || role === "STANDARD") && ( 
+                    <>
+                    <h1><br></br></h1>
+                    <h1><br></br></h1>
+                    <div className={s.addButtonContainer}>
+                    <SwordLinkButton href={`${PATHS.fightReport.replace(':number', number || '')}`}>Dodaj raport</SwordLinkButton>
+                    </div>
+                    { role === 'ADMIN' && (
+                        <>
+                        <h1><br></br></h1>
+                        <div className={s.addButtonContainer}>
+                        <SwordLinkButton href={`${PATHS.editFight.replace(':number', number || '')}`}>Edytuj</SwordLinkButton>
+                        </div>
+                        </>
+                    )}
+                    </>
+                )}
             </div>
         </div>
 

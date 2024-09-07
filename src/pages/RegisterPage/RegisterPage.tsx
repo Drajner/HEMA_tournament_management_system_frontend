@@ -22,14 +22,13 @@ export const RegisterPage: React.FC = () => {
 			return;
 		}
 		let response = await sendRequestPOST(
-			{ username: data.username, password: data.password },
+			{ "username": data.username, "password": data.password },
 			'users/register'
 		);
 		let result = await response.json();
 
-		if (result.status) {
-			redirect(PATHS.tournament);
-			localStorage.setItem('token', result.token);
+		if (response.ok) {
+			redirect(PATHS.loginAdmin);
 		} else {
 			setIsFailOpen(true);
 		}
@@ -40,7 +39,6 @@ export const RegisterPage: React.FC = () => {
 			<div className={s.fullDiv}>
 				<div className={s.transDiv}>
 					<h1 className={s.headerUp}>REJESTRACJA</h1>
-					<h3 className={s.headerDown}>ADMINISTRATOR</h3>
 					<form className={s.formContainer} onSubmit={handleSubmit(sendRegisterRequest)}>
 						<div className={s.inputContainer}>
 							<SwordInput placeholder="Nazwa użytkownika" {...register('username')} />

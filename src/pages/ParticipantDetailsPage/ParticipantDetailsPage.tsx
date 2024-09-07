@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
 import s from './ParticipantDetailsPage.module.scss';
-import { sendRequestGET } from 'requests';
+import { sendRequestGET, sendUnauthRequestGET } from 'requests';
 import { Link, useParams } from 'react-router-dom';
 import {SwordLinkButton} from "../../components/SwordLinkButton";
 import {SwordLinkButtonAlt} from "../../components/SwordLinkButtonAlt";
@@ -26,9 +26,12 @@ export const ParticipantDetailsPage: React.FC = () => {
     const [participantDetails, setParticipantDetails] = useState(null);
     const { number } = useParams();
 
+    const [role, setRole] = useState<string | null>(null);
 
     useEffect(() => {
-        sendRequestGET('participants/get/'+number)
+        setRole(localStorage.getItem("role"));
+
+        sendUnauthRequestGET('participants/get/'+number)
         .then(async response => {
             const participantData = await response.json();
             setParticipantDetails(participantData);
@@ -71,11 +74,15 @@ export const ParticipantDetailsPage: React.FC = () => {
                         <p><span>Kartki:</span> {cards}</p>
                     </div>
                 </div>
+                {role === 'ADMIN' && ( 
+                <>
                 <h1><br></br></h1>
                 <h1><br></br></h1>
                 <div className={s.addButtonContainer}>
                 <SwordLinkButton href={`${PATHS.editParticipant.replace(':number', number || "")}`}>Edytuj</SwordLinkButton>
                 </div>
+                </>
+                )}
             </div>
         </div>
     );

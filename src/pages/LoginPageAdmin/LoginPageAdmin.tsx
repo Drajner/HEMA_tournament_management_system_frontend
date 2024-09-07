@@ -26,6 +26,7 @@ export const LoginPageAdmin: React.FC = () => {
 			if (r.ok) {
 				redirect(PATHS.tournament)
 				localStorage.setItem("token", response.token);
+				localStorage.setItem("role", response.status);
 			}
 			else {
 				setIsFailOpen(true)
@@ -38,7 +39,7 @@ export const LoginPageAdmin: React.FC = () => {
 			<div className={s.fullDiv}>
 				<div className={s.transDiv}>
 					<h1 className={s.headerUp}>LOGOWANIE</h1>
-					<h3 className={s.headerDown}>ADMINISTRATOR</h3>
+					<h3 className={s.headerDown}></h3>
 					<form className={s.formContainer} onSubmit={handleSubmit(sendLoginRequest)}>
 						<div className={s.inputContainer}>
 							<SwordInput placeholder="Nazwa użytkownika" {...register("username")}/>

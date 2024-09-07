@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TemplatePage } from "templates/TemplatePage";
 import s from "./TournamentDetailsPage.module.scss";
-import { sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendEmptyRequestPOST, sendRequestDELETE } from 'requests';
+import { sendRequestGET, sendRequestPOST, sendBareRequestPOST, sendEmptyRequestPOST, sendRequestDELETE, sendUnauthRequestGET} from 'requests';
 import { Link, useParams } from 'react-router-dom';
 import {SwordLinkButton} from "../../components/SwordLinkButton";
 import {SwordLinkButtonAlt} from "../../components/SwordLinkButtonAlt";
@@ -29,26 +29,26 @@ export const TournamentDetailsPage = () => {
   const [isEvaluateFinalsPopupOpen, setIsEvaluateFinalsPopupOpen] = useState(false);
   const [isPurgeFinalsPopupOpen, setIsPurgeFinalsPopupOpen] = useState(false);
 
+  const [role, setRole] = useState<string | null>(null);
 
   const { number } = useParams();
 
   const fetchData = () => {
-	  sendRequestGET('participants/get/tournament/'+number)
+	  sendUnauthRequestGET('participants/get/tournament/'+number)
       .then(async response => {
         const participantsData = await response.json();
         setParticipants(participantsData);
       })
       .catch(err => console.error("Error fetching participants:", err));
 
-    // Fetch data for Grupy (groups)
-    sendRequestGET('groups/get/'+number)
+    sendUnauthRequestGET('groups/get/'+number)
       .then(async response => {
         const groupsData = await response.json();
         setGroups(groupsData);
       })
       .catch(err => console.error("Error fetching groups:", err));
 
-    sendRequestGET('tournaments/get/'+number)
+    sendUnauthRequestGET('tournaments/get/'+number)
       .then(async response => {
         const tournamentData = await response.json();
         setTournament(tournamentData);
@@ -57,6 +57,7 @@ export const TournamentDetailsPage = () => {
 	};
 
   useEffect(() => {
+      setRole(localStorage.getItem("role"))
       fetchData();
   }, []);
 
@@ -171,11 +172,13 @@ export const TournamentDetailsPage = () => {
           <h1 className={s.headerUp}>Zawodnicy</h1>
           <h1><br></br></h1>
           <h1><br></br></h1>
+          {role === 'ADMIN' && ( 
           <Link to={`/addParticipant/${number}`}>
             <div className={s.addButtonContainer}>
             <SwordButton>Dodaj zawodnika</SwordButton>
             </div>
           </Link>
+          )}
           <div className={s.contentRow}>
             {participants.map((participant: any) => (
               <div key={participant.id} className={s.mainDiv}>
@@ -192,6 +195,7 @@ export const TournamentDetailsPage = () => {
                   </div>
                 </div>
                 </Link>
+                {role === 'ADMIN' && ( 
                 <SwordButtonPopup
                     className={s.deleteButton}
                     onClick={() => openParticipantDeletePopup(participant.participantId)}
@@ -199,6 +203,7 @@ export const TournamentDetailsPage = () => {
         	        >
                     Usuń
                 </SwordButtonPopup>
+                )}
               </div>
             ))}
           </div>
@@ -210,11 +215,13 @@ export const TournamentDetailsPage = () => {
           <h1><br></br></h1>
           <div className={s.contentRow}>
           <h1><br></br></h1>
+            {role === 'ADMIN' && ( 
             <div className={s.addButtonContainer}>
               <SwordButtonPopup onClick={() => handleAddGroup()} className={s.addButton}>
                 Dodaj grupę
               </SwordButtonPopup>
             </div>
+            )}
             {groups.map((group: any, index: number) => (
               <div key={group.id} className={s.mainDiv}>
                 <div className={s.header}>
@@ -222,6 +229,7 @@ export const TournamentDetailsPage = () => {
                   <h2 className={s.header2}>GRUPA {index + 1}</h2>
                   </Link>
                 </div>
+                {role === 'ADMIN' && ( 
                 <SwordButtonPopup
                     className={s.deleteButton}
                     onClick={() => openGroupDeletePopup(group.groupId)}
@@ -229,6 +237,7 @@ export const TournamentDetailsPage = () => {
         	        >
                     Usuń
                 </SwordButtonPopup>
+                )}
               </div>
             ))}
           </div>
@@ -237,9 +246,13 @@ export const TournamentDetailsPage = () => {
           <div className={s.addButtonContainer}>
           <SwordLinkButton href={`${PATHS.finals.replace(':number', number || "")}`}>Finały</SwordLinkButton>
           </div>
+
+          {role === 'ADMIN' && ( 
+          <>
           <h1 className={s.headerUp}>Funkcje turnieju</h1>
           <h1><br></br></h1>
           <h1><br></br></h1>
+
           <div className={s.contentRow}>
             <div className={s.addButtonContainer}>
               <SwordButtonPopup onClick={() => setIsRenamePopupOpen(true)} className={s.addButton}>
@@ -320,6 +333,8 @@ export const TournamentDetailsPage = () => {
                 title="Wyczyść finały"
                 text="UWAGA! Ta opcja całkowicie usuwa drzewo finałowe z jego zawartością. Akcja jest nieodwracalna. Czy chcesz wyczyścić finały?"
             />
+            </>
+          )}
         </div>
       </div>
     </TemplatePage>
