@@ -27,7 +27,7 @@ $color-font-button-secondary: #b3b3b3;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-x: auto;
   overflow-y: hidden;
   padding: 20px;
 }
@@ -41,8 +41,8 @@ $color-font-button-secondary: #b3b3b3;
 
 .childNodes {
   display: flex;
-  flex-direction: column; /* Stack child nodes vertically */
-  margin-top: 10px; /* Space between parent and children */
+  flex-direction: column;
+  margin-top: 10px;
 }
 
 .addButtonContainer {
@@ -53,7 +53,7 @@ $color-font-button-secondary: #b3b3b3;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start; /* Ensure it aligns left */
-  width: max-content; /* Allow it to take up as much width as needed */
+  justify-content: flex-start;
+  width: max-content;
   position: relative;
 }

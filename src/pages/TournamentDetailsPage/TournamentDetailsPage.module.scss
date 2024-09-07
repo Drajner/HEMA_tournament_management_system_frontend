@@ -12,7 +12,7 @@ $color-font-button-secondary: #b3b3b3;
   display: flex;
   align-items: center;
   //justify-content: center;
-  flex-direction: column; /* Centers the content vertically */
+  flex-direction: column;
 }
 
 .transDiv {
@@ -56,27 +56,27 @@ $color-font-button-secondary: #b3b3b3;
   border-radius: 16px;
   display: flex;
   align-items: center;
-  position: relative; /* Position the button absolutely within this container */
-  padding-right: 3rem; /* Ensure there's space for the button */
+  position: relative; 
+  padding-right: 3rem; 
 }
 
 .header {
   display: flex;
   align-items: center;
   flex: 1;
-  gap: 1rem; /* Adds space between text and button */
+  gap: 1rem;
 }
 
 .header2 {
   color: $color-font-button-secondary;
-  flex: 1; /* Allow the text to take available space */
+  flex: 1;
 }
 
 .deleteButton {
-  position: absolute; /* Position absolutely within the mainDiv */
-  right: 1rem; /* Distance from the right border */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Center vertically with respect to the button */
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .mainDiv:hover {

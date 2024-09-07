@@ -168,7 +168,6 @@ export const TournamentDetailsPage = () => {
       <div className={s.fullDiv}>
       <h1 className={s.headerUp}>{tournament.name ? tournament.name : "CHUUUJ"}</h1>
         <div className={s.transDiv}>
-          {/* Section for Zawodnicy */}
           <h1 className={s.headerUp}>Zawodnicy</h1>
           <h1><br></br></h1>
           <h1><br></br></h1>
@@ -210,7 +209,6 @@ export const TournamentDetailsPage = () => {
 
           <h1><br></br></h1>
 
-          {/* Section for Grupy */}
           <h1 className={s.headerUp}>Grupy</h1>
           <h1><br></br></h1>
           <div className={s.contentRow}>

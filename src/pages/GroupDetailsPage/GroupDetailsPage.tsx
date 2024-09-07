@@ -240,7 +240,6 @@ export const GroupDetailsPage = () => {
 
           <h1><br></br></h1>
 
-          {/* Section for Grupy */}
           <h1 className={s.headerUp}>Walki</h1>
           <h1><br></br></h1>
           <h1><br></br></h1>

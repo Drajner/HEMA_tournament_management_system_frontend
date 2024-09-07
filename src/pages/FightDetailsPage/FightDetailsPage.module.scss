@@ -6,14 +6,14 @@ $color-font-button-secondary: #b3b3b3;
 .participantInfo {
     display: flex;
     justify-content: space-between;
-    align-items: center;  // Centers participant boxes and VS text vertically
-    gap: 20px;            // Space between the elements
+    align-items: center;  
+    gap: 20px;            
 }
   
 .participantBox {
-    flex: 1;                         // Allows the boxes to grow and fill the available space
+    flex: 1;              
     max-width: 45%;
-    min-width: 45%;                // Set the max width to a percentage of the parent container
+    min-width: 45%;       
     padding: 20px;
     background-color: whitesmoke;
     border: 2px solid $color-button-primary;
@@ -91,13 +91,13 @@ $color-font-button-secondary: #b3b3b3;
   outline: 3px solid $color-font-button-secondary;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: relative;  // Added to use for centering the button within the container
+  position: relative;  
 }
 
 .addButtonContainer {
   display: flex;
-  justify-content: center;  // Centers the button horizontally within the container
-  margin-top: 20px;  // Adds some space between the container and the button
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .background {
@@ -108,7 +108,7 @@ $color-font-button-secondary: #b3b3b3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 40px; // Add padding at the bottom to prevent the button from sticking to the edge
+  padding-bottom: 40px;
 }
 
 .transDiv {

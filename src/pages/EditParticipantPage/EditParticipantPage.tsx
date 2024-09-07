@@ -25,7 +25,6 @@ export const EditParticipantPage: React.FC = () => {
     const [participantDetails, setParticipantDetails] = useState<ParticipantDetails | null>(null);
     const { number } = useParams();
     
-    // State for form inputs
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [club, setClub] = useState('');
