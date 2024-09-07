@@ -43,9 +43,9 @@ export const FightReportPage = () => {
         fetchFight();
     }, [number]);
 
-    useEffect(() => {
-        fetchParticipants();
-    }, [groupId]);
+    // useEffect(() => {
+    //     fetchParticipants();
+    // }, [groupId]);
 
     const fetchFight = () => {
         sendUnauthRequestGET('fights/getOne/' + number)
@@ -60,6 +60,8 @@ export const FightReportPage = () => {
                 setDoubles(fightData.doubles || 0);
                 setWinnerId(fightData.winner?.participantId || null);
                 setGroupId(fightData.groupId || null);
+
+                setParticipants([fightData.firstParticipant, fightData.secondParticipant])
             })
             .catch(err => console.error("Error fetching fight details:", err));
     };
@@ -96,8 +98,8 @@ export const FightReportPage = () => {
             'reports/send'
         ).then(async r => {
             if (r.ok) {
-                fetchFight();
-                fetchParticipants();
+                //fetchFight();
+                //fetchParticipants();
                 redirect(PATHS.fight.replace(":number", number || ''));
             } else {
                 alert("Nie udało się dokonać zmian");

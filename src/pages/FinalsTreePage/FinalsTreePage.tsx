@@ -35,7 +35,7 @@ interface FightNodeProps {
 }
 
 
-const FightNode: React.FC<FightNodeProps> = ({ fightNode, level = 0 }) => {
+const FightNode: React.FC<FightNodeProps> = ({ fightNode, level = 1 }) => {
   if (!fightNode) return null;
 
   const fight = fightNode.fight;
@@ -97,6 +97,7 @@ const FinalsTree: React.FC<FinalsTreeProps> = ({ data }) => {
               </SwordLinkButton>
             </div>
           </div>
+          <h1><br></br></h1>
         </div>
         <div className={s.horizontalTreeContainer}>
           <FightNode fightNode={finals.secondChildNode} />

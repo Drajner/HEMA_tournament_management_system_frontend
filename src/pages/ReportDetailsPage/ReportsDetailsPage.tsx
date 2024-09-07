@@ -48,9 +48,8 @@ export const ReportDetailsPage = () => {
                     })
                     .catch(err => console.error("Error fetching second participant:", err));
             }
-
-            if(reportDetails.winnerId != undefined && reportDetails.winnerId != null){
-                sendUnauthRequestGET('participants/get/' + reportDetails.winnerId)
+            if(reportDetails.winner != undefined && reportDetails.winner != null){
+                sendUnauthRequestGET('participants/get/' + reportDetails.winner)
                     .then(async (response) => {
                         const participantData = await response.json();
                         setWinner(participantData);
