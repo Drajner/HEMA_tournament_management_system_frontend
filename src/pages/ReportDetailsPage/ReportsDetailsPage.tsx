@@ -68,7 +68,7 @@ export const ReportDetailsPage = () => {
 		let response = sendEmptyRequestPOST('reports/accept/'+number)
         .then(async r => {
 			if (r.ok) {
-				redirect(PATHS.participant.replace(":number", number || ''))
+				redirect(PATHS.reports)
 			}
 			else {
 				alert("Nie udało się dokonać zmian");
